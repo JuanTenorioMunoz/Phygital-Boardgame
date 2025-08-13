@@ -22,8 +22,6 @@ function Lobby() {
     })
   }, [socket])
 
-  console.log(userList)
-
   return (
     <>
         <div>LOBBYY</div>
