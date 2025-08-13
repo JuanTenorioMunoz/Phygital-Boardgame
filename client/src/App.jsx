@@ -5,15 +5,21 @@ const socket = io.connect("http://localhost:3001")
 
 function App() {
 
-  const [userList, setUserList] = useState([{username: "Pedro"}, {username: "Alberto"}])
+  const [userList, setUserList] = useState([])
   const [username, setUsername] = useState("Example text")
 
-  const sendMessage = () => {
-    socket.emit(username)
+  const sendUsername = () => {
+    socket.emit("send_username", {username})
   }
+
 
   useEffect(() => {
 
+    socket.emit("request_userList")
+
+    socket.on("receive_userList", (data) => {
+        setUserList(data);
+    })
   }, [socket])
 
   console.log(userList)
@@ -21,7 +27,7 @@ function App() {
   return (
     <>
       <input placeholder='Enter your name' onChange={(e) => setUsername(e.target.value)}></input>
-      <button onClick={sendMessage}>Enter</button>
+      <button onClick={sendUsername}>Enter</button>
       <div className='usernames'>
         {userList.map((user)=>{
           return(<div>{user.username}</div>)

@@ -13,11 +13,20 @@ const io = new Server(server, {
     }
 })
 
+let users = [
+    {username: "Alonso"},
+]
+
 io.on("connection", (socket) => {
     console.log("user connected: ", socket.id)
 
-    socket.on("send_message", (data) => {
-        socket.broadcast.emit("receive_message", data)
+    socket.on("send_username", (data) => {
+        users.push(data)
+        io.emit("receive_userList", users)
+    })
+
+    socket.on("request_userList", (data) => {
+        socket.emit("receive_userList", users)
     })
 }
 )
