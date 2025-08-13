@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import './App.css'
 import io from "socket.io-client"
 const socket = io.connect("http://localhost:3001")
 
 function App() {
+
+  const [userList, setUserList] = useState(["Pedro", "Alberto"])
+  const [username, setUsername] = useState("Example text")
 
   const sendMessage = () => {
     socket.emit()
@@ -10,8 +14,13 @@ function App() {
 
   return (
     <>
-      <input placeholder='message'></input>
-      <button onClick={sendMessage}>sendMessage</button>
+      <input placeholder='Enter your name'></input>
+      <button onClick={sendMessage}>Enter</button>
+      <div className='usernames'>
+        {userList.map((user)=>{
+          <div>{user}</div>
+        })}
+      </div>
     </>
   )
 }
