@@ -2,7 +2,7 @@ import './App.css'
 import Router from './routes/Router'
 import { Provider } from "react-redux"
 import store from './redux/store';
-import { SocketProvider } from './socketProvider';
+import { SocketProvider } from './SocketProvider';
 
 function App() {
 

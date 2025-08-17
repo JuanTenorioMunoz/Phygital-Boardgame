@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import './Lobby.css'
-import { useSocket } from '../../socketProvider'
+import { useSocket } from '../../SocketProvider'
 import { useSelector } from 'react-redux'
 
 
 function Lobby() {
 
-  const socket = useSocket
+  const socket = useSocket();
 
   const userList = useSelector((state) => state.users)
   const [username, setUsername] = useState("Example text")
