@@ -13,14 +13,23 @@ export const SocketProvider = ({ children }) => {
     useEffect(() => {
     console.log("sockete", socket.id);
 
-    socket.on("update_turn", (data) => {
-      dispatch(updateTurn(data));
-    });
+    const handleUpdateTurn = (data) => {
+        dispatch(updateTurn(data))
+    }
+
+    const handleUserList = (data) => {
+        dispatch(updateTurn(data))
+    }
+
+
+    socket.on("update_turn", handleUpdateTurn);
+    socket.on("receive_userList", handleUserList);
 
     return () => {
       socket.off("update_turn");
+      socket.off("receive_userList");
     };
-  }, [dispatch]);
+    }, [dispatch]);
 
     return(
     <>

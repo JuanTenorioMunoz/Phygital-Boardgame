@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import './Lobby.css'
-import io from "socket.io-client"
-import socket from '../../socket'
+import { useSocket } from '../../socketProvider'
+import { useSelector } from 'react-redux'
+
 
 function Lobby() {
 
-  const [userList, setUserList] = useState([])
+  const socket = useSocket
+
+  const userList = useSelector((state) => state.users)
   const [username, setUsername] = useState("Example text")
 
   const sendUsername = () => {
@@ -17,9 +20,6 @@ function Lobby() {
 
     socket.emit("request_userList")
 
-    socket.on("receive_userList", (data) => {
-        setUserList(data);
-    })
   }, [socket])
 
   return (
