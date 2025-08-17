@@ -5,10 +5,10 @@ const turnSlice = createSlice({
     initialState: 1,
     reducers: {
         updateTurn: (state, action) => {
-            state = action.payload
+            return action.payload
         }
     }
 })
 
-export const updateTurn = turnSlice.actions;
+export const {updateTurn} = turnSlice.actions;
 export default turnSlice.reducer;
