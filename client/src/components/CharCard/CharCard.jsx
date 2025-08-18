@@ -1,15 +1,8 @@
-import React from "react"
-import socket from "../../socket"
 
-const CharCard = ({charName}) => {
-
-    const selectCharacter = () => {
-        socket.emit("update_character_status", {charName, status:true})
-    }
-
+const CharCard = ({charName, onClick}) => {
     return(
         <>
-            <div className="character-container" onClick={selectCharacter}>
+            <div className="character-container" onClick={(onClick)}>
                 <h1>{charName}</h1>
             </div>
         </>

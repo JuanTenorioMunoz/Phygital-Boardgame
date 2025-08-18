@@ -12,9 +12,10 @@ function Lobby() {
   const userList = useSelector((state) => state.users)
   const [character, setCharacter] = useState()
 
-  const selectCharacter = () => {
-    socket.emit("select_character", {character})
+  const selectCharacter = (charName) => {
+        socket.emit("update_character_status", {charName, status:true})
   }
+
 
 
   useEffect(() => {
@@ -31,7 +32,7 @@ function Lobby() {
         {userList
           .filter(user => user.status === false) 
           .map((user)=>{
-            return(<CharCard charName={user.characterName}></CharCard>)
+            return(<CharCard charName={user.characterName} onClick={() => selectCharacter(user.characterName)}></CharCard>)
           })}
       </div>
     </>
