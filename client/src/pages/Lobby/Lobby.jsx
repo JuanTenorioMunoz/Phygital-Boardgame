@@ -34,11 +34,21 @@ function Lobby() {
         
         <div>You are: {user}</div>
 
-      <div className='characternames'>
+      <div className='available-characters'>
+        <h1>Available Characters:</h1>
         {userList
           .filter(user => user.status === false) 
           .map((user)=>{
             return(<CharCard charName={user.characterName} onClick={() => selectCharacter(user.characterName)}></CharCard>)
+          })}
+      </div>
+
+      <div className='available-characters'>
+        <h1>Current players:</h1>
+        {userList
+          .filter(user => user.status === true) 
+          .map((user)=>{
+            return(<CharCard charName={user.characterName}></CharCard>)
           })}
       </div>
     </>
