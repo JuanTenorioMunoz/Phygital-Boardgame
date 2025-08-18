@@ -28,9 +28,11 @@ function Lobby() {
         <div>LOBBYY</div>
 
       <div className='characternames'>
-        {userList.map((user)=>{
-          return(<CharCard charName={user.characterName}></CharCard>)
-        })}
+        {userList
+          .filter(user => user.status === false) 
+          .map((user)=>{
+            return(<CharCard charName={user.characterName}></CharCard>)
+          })}
       </div>
     </>
   )
