@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './Lobby.css'
 import { useSocket } from '../../SocketProvider'
 import { useSelector } from 'react-redux'
+import CharCard from '../../components/CharCard/CharCard';
 
 
 function Lobby() {
@@ -9,10 +10,10 @@ function Lobby() {
   const socket = useSocket();
 
   const userList = useSelector((state) => state.users)
-  const [username, setUsername] = useState("Example text")
+  const [character, setCharacter] = useState()
 
-  const sendUsername = () => {
-    socket.emit("send_username", {username})
+  const selectCharacter = () => {
+    socket.emit("select_character", {character})
   }
 
 
@@ -25,11 +26,10 @@ function Lobby() {
   return (
     <>
         <div>LOBBYY</div>
-      <input placeholder='Enter your name' onChange={(e) => setUsername(e.target.value)}></input>
-      <button onClick={sendUsername}>Enter</button>
-      <div className='usernames'>
+
+      <div className='characternames'>
         {userList.map((user)=>{
-          return(<div>{user.username}</div>)
+          return(<CharCard charName={user.characterName}></CharCard>)
         })}
       </div>
     </>
