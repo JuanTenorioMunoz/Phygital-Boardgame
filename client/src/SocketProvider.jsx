@@ -18,7 +18,7 @@ export const SocketProvider = ({ children }) => {
     }
 
     const handleUserList = (data) => {
-        dispatch(updateTurn(data))
+        dispatch(setUsers(data))
     }
 
 
