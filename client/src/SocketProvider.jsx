@@ -2,6 +2,7 @@ import socket from "./socket";
 import React, { createContext, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateTurn } from "./redux/turnSlice/TurnSlice";
+import { setUsers } from "./redux/usersSlice/UsersSlice";
 
 const SocketContext = createContext(socket);
 
