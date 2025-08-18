@@ -1,8 +1,10 @@
 const express = require("express");
+const characters = require("./db/characters");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io")
 const cors = require("cors");
+
 
 app.use(cors());
 
@@ -13,14 +15,7 @@ const io = new Server(server, {
     }
 })
 
-let users = [
-    {characterName: "Veyra Korr", status: false, credits: 800, territories: []},
-    {characterName: "Dravik Holt", status: false, credits: 800, territories: []},
-    {characterName: "Selene Veyth", status: false, credits: 800, territories: []},
-    {characterName: "Kael Orion", status: false, credits: 800, territories: []},
-    {characterName: "Morganna Flux", status: false, credits: 800, territories: []},
-    {characterName: "Zerax Kane", status: false, credits: 800, territories: []},
-]
+let users = characters
 
 const handleRequestUserList = (socket) => {
     socket.emit("receive_userList", users)
