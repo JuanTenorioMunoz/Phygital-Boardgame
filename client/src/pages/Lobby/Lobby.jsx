@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react'
 import './Lobby.css'
 import { useSocket } from '../../SocketProvider'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CharCard from '../../components/CharCard/CharCard';
+import { updatePlayer } from '../../redux/playerSlice/playerSlice';
 
 
 function Lobby() {
 
+  const dispatch = useDispatch()
+
   const socket = useSocket();
 
   const userList = useSelector((state) => state.users)
-  const [character, setCharacter] = useState()
 
   const selectCharacter = (charName) => {
         socket.emit("update_character_status", {charName, status:true})
+        dispatch(updatePlayer(charName))
   }
 
+  const user = useSelector((state) => state.player)
 
 
   useEffect(() => {
@@ -27,6 +31,8 @@ function Lobby() {
   return (
     <>
         <div>LOBBYY</div>
+        
+        <div>You are: {user}</div>
 
       <div className='characternames'>
         {userList
