@@ -24,6 +24,7 @@ export const SocketProvider = ({ children }) => {
 
     const handleStartGame = () => {
         dispatch(updateGameStatus(true))
+        console.log("Dispatched boy")
     }
 
     socket.on("update_turn", handleUpdateTurn);
@@ -33,6 +34,7 @@ export const SocketProvider = ({ children }) => {
     return () => {
       socket.off("update_turn");
       socket.off("receive_userList");
+      socket.off("server_start_game");
     };
     }, [dispatch]);
 

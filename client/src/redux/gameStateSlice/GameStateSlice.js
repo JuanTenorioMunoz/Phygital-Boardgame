@@ -17,7 +17,7 @@ const gameStateSlice = createSlice({
             state.cycle = action.payload
         },
         updateGameStatus: (state, action) => {
-            state.cycle = action.payload
+            state.status = action.payload
         }
     }
 })

@@ -36,6 +36,7 @@ const handleUpdateCharacterStatus = ({ charName, status }) => {
 
 const handleGameStart = () => {
     io.emit("server_start_game")
+    console.log("start game")
 }
 
 io.on("connection", (socket) => {   
