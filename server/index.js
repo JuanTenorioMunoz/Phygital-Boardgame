@@ -17,6 +17,7 @@ const io = new Server(server, {
 })
 
 let users = characters;
+let playerOrder = [];
 let turnNumber = 1;
 let cycleNumber = 1;
 let activeDecrees = [];
