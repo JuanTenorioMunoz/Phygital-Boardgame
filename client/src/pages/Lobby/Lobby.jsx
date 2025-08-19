@@ -9,18 +9,19 @@ import { updatePlayer } from '../../redux/playerSlice/playerSlice';
 function Lobby() {
 
   const dispatch = useDispatch()
-
   const socket = useSocket();
-
+  
   const userList = useSelector((state) => state.users)
+  const user = useSelector((state) => state.player)
 
   const selectCharacter = (charName) => {
         socket.emit("update_character_status", {charName, status:true})
         dispatch(updatePlayer(charName))
   }
 
-  const user = useSelector((state) => state.player)
-
+  const startGame = () =>{
+    socket.emit("client_start_game")
+  }
 
   useEffect(() => {
 
@@ -30,6 +31,7 @@ function Lobby() {
 
   return (
     <>
+        <button onClick={startGame()}>Start Game</button>
         <div>LOBBYY</div>
         
         <div>You are: {user}</div>

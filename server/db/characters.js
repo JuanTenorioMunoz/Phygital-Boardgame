@@ -9,4 +9,4 @@ const characters = [
     {characterName: "Zerax Kane", status: false, credits: startingCredits, territories: []},
 ]
 
-module.exports = characters; 
+export default characters;

@@ -22,9 +22,13 @@ export const SocketProvider = ({ children }) => {
         dispatch(setUsers(data))
     }
 
+    const handleStartGame = () => {
+        
+    }
 
     socket.on("update_turn", handleUpdateTurn);
     socket.on("receive_userList", handleUserList);
+    socket.on("server_start_game", handleStartGame)
 
     return () => {
       socket.off("update_turn");

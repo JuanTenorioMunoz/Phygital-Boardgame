@@ -197,4 +197,4 @@ const initialDecrees = [
   },
 ];
 
-module.exports = {decrees, initialDecrees}; 
+export default {decrees, initialDecrees}

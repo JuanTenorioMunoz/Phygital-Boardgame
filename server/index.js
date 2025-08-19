@@ -1,9 +1,10 @@
-const express = require("express");
-const characters = require("./db/characters");
+import express from "express";
+import characters from "./db/characters.js"; 
+import http from "http";
+import { Server } from "socket.io";
+import cors from "cors";
+
 const app = express();
-const http = require("http");
-const { Server } = require("socket.io")
-const cors = require("cors");
 
 
 app.use(cors());
@@ -33,11 +34,16 @@ const handleUpdateCharacterStatus = ({ charName, status }) => {
     io.emit("receive_userList", users);
 };
 
+const handleGameStart = () => {
+    io.emit("server_start_game")
+}
+
 io.on("connection", (socket) => {   
     console.log("user connected: ", socket.id)
 
     socket.on("request_userList", () => handleRequestUserList(socket));
     socket.on("update_character_status", handleUpdateCharacterStatus);
+    socket.on("client_start_game", handleGameStart)
 }
 )
 
