@@ -1,7 +1,7 @@
 import socket from "./socket";
 import React, { createContext, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateTurn } from "./redux/turnSlice/TurnSlice";
+import { updateGameStatus, updateTurn } from "./redux/gameStateSlice/GameStateSlice";
 import { setUsers } from "./redux/usersSlice/UsersSlice";
 
 const SocketContext = createContext(socket);
@@ -23,7 +23,7 @@ export const SocketProvider = ({ children }) => {
     }
 
     const handleStartGame = () => {
-        
+        dispatch(updateGameStatus(true))
     }
 
     socket.on("update_turn", handleUpdateTurn);

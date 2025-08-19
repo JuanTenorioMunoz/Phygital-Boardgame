@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit'
-import turnReducer from "./turnSlice/TurnSlice";
+import gameStateReducer from "./gameStateSlice/GameStateSlice";
 import usersReducer from "./usersSlice/UsersSlice"
 import playerReducer from "./playerSlice/playerSlice"
 
 const store = configureStore({
     reducer: {
-        turn: turnReducer,
+        gameState: gameStateReducer,
         users: usersReducer,
         player: playerReducer,
     }

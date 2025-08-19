@@ -6,6 +6,7 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Lobby/>}/>
+                <Route path="/dashboard" element={<Lobby/>}/>
             </Routes>
         </BrowserRouter>
     )

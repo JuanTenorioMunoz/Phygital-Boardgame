@@ -4,11 +4,13 @@ import { useSocket } from '../../SocketProvider'
 import { useDispatch, useSelector } from 'react-redux'
 import CharCard from '../../components/CharCard/CharCard';
 import { updatePlayer } from '../../redux/playerSlice/playerSlice';
+import { useNavigate } from 'react-router';
 
 
-function Lobby() {
+const Lobby = () => {
 
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const socket = useSocket();
   
   const userList = useSelector((state) => state.users)
@@ -23,11 +25,15 @@ function Lobby() {
     socket.emit("client_start_game")
   }
 
+  const gameStatus = useSelector((state) => state.gameState.gameStatus)
+
   useEffect(() => {
+    socket.emit("request_userList");
 
-    socket.emit("request_userList")
-
-  }, [socket])
+    if (gameStatus) {
+      navigate("/dashboard");
+    }
+  }, [gameStatus, socket])
 
   return (
     <>
