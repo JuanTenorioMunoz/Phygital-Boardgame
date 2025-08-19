@@ -6,3 +6,5 @@ const shuffleArray = (array) => {
   }
   return arr;
 }
+
+export default shuffleArray
