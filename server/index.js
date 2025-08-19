@@ -15,7 +15,10 @@ const io = new Server(server, {
     }
 })
 
-let users = characters
+let users = characters;
+let turnNumber = 1;
+let cycleNumber = 1;
+let activeDecrees = [];
 
 const handleRequestUserList = (socket) => {
     socket.emit("receive_userList", users)
