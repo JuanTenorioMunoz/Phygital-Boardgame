@@ -1,4 +1,4 @@
-const territories = [
+const territoriesBenefits = [
   {
     id: "b1",
     title: "Logística+",
@@ -21,7 +21,7 @@ const territories = [
     id: "b4",
     title: "Fortificación",
     credits: 600,
-    desc: "Si estás solo y un rival entra debe pagar 100 Cr a tu cuenta al entrar aquí."
+    desc: "Si estás solo y un rival entra, debe pagar 100 Cr a tu cuenta al entrar aquí."
   },
   {
     id: "b5",
@@ -115,4 +115,26 @@ const territories = [
   }
 ];
 
-export default territories;
+const territoriesName = [
+  { id: 101, name: "Canal del Levitán", type: "Agua" },
+  { id: 202, name: "Cañon del Eco Eterno", type: "Desierto" },
+  { id: 303, name: "Crater de Fuego Antiguo", type: "Desierto" },
+  { id: 404, name: "Núcleo de Cromo", type: "Minerales" },
+  { id: 505, name: "Cúpulas de Iridio", type: "Minerales" },
+  { id: 606, name: "El Velo Carmesí", type: "Desierto" },
+  { id: 707, name: "Cordillera de Platino", type: "Minerales" },
+  { id: 808, name: "Bóvedas de Adamantio", type: "Minerales" },
+  { id: 909, name: "Arboles de Luz Fractal", type: "Bosque" },
+  { id: 110, name: "Pantano de Cobre", type: "Bosque" },
+  { id: 220, name: "Jardines de Clorofibra", type: "Bosque" },
+  { id: 330, name: "Costa del Zafiro", type: "Agua" },
+  { id: 440, name: "Arena de Mercurio", type: "Desierto" },
+  { id: 550, name: "Selva de Carbón Vivo", type: "Bosque" },
+  { id: 660, name: "Selva del Alba", type: "Bosque" },
+  { id: 770, name: "Arrecife Esmeralda", type: "Agua" },
+  { id: 880, name: "Dunas de Ónix", type: "Desierto" },
+  { id: 990, name: "Mar de Titanio", type: "Agua" },
+  { id: 111, name: "Lagos de Neón", type: "Agua" },
+];
+
+export default {territoriesBenefits, territoriesName};

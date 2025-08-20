@@ -18,7 +18,6 @@ const io = new Server(server, {
 })
 
 let users = characters;
-let playerOrder = [];
 let turnNumber = 1;
 let cycleNumber = 1;
 let activeDecrees = [];
@@ -58,6 +57,14 @@ const handleGameStart = () => {
     turnNumber = 1;
     io.emit("server_start_game")
     console.log("start game")
+}
+
+const onTurnStart = () => {
+
+}
+
+const onCycleStart = () => {
+    
 }
 
 io.on("connection", (socket) => {   

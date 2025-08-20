@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     turn: 1,
     cycle: 1,
-    status: false,
+    status: false, // I FORGOR :(
 }
 
 const gameStateSlice = createSlice({
