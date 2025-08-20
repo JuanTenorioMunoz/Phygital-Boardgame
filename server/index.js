@@ -68,7 +68,7 @@ const handleGameStart = () => {
 }
 
 const handleGameState = () => {
-    if (turnNumber <= users.size) {
+    if (turnNumber <= users.length) {
     turnNumber++;
   } else {
     turnNumber = 1;
@@ -95,24 +95,33 @@ const setTerritoriesValues = () => {
 const getTerritoriesIncome = (username) => {
     const foundUser = findUserByCharacterName(username)
     const territories = foundUser.territories
-    const territoriesCodes = territories.forEach(getTerritoryIncome())
+    const combinedTerritoriesIncome = territories.reduce(
+        (sum, t) => sum + getTerritoryIncome(t), 0
+    );
+
+    return combinedTerritoriesIncome;
 }
 
 const getTerritoryIncome = (id) => {
     const territory = findTerritoryByCode(id);
     const netIncome = territory.credits;
-    const tenants = territory.players.size
+    const tenants = territory.players.length
     const realincome = netIncome/tenants;
     return realincome;
 }
 
 const findUserByCharacterName = (username) => {
-    return users.find(user => user.characterName = username)
+    return users.find(user => user.characterName === username)
 }
 
 const findTerritoryByCode = (code) => {
-    const territory = territories.find(territory = territory.id === code)
+    const territory = territories.find(t = t.id === code)
     return territory
+}
+
+const setPlayerCredits = (username, value) => {
+    const foundUser = findUserByCharacterName(username);
+    foundUser.credits = value;
 }
 
 const setInitialDecrees = () => {
@@ -120,15 +129,24 @@ const setInitialDecrees = () => {
 }
 
 const whoseTurnIsIT = () => {
-    const userWithTurnIs = users.find(users.find(u => u.status === active))
+    const userWithTurnIs = users.find(u => u.turnOrder === turnNumber);
     return userWithTurnIs.characterName;
+}
+
+const getPlayerCredits = (username) => {
+    const founduser = findUserByCharacterName(username);
+    return founduser.credits
 }
 
 const onTurnStart = () => {
     if(cycleNumber === 1){
 
     } else{
-        getTerritoriesIncome(whoseTurnIsIT())
+        const currentPlayer = whoseTurnIsIT()
+        const currentCredits = getPlayerCredits(currentPlayer);
+        const territoriesIncome = getTerritoriesIncome(currentPlayer);
+        const newCredits = setPlayerCredits(currentPlayer, currentCredits + territoriesIncome)
+        console.log(newCredits)
     }
 }
 
