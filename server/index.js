@@ -4,6 +4,8 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import shuffleArray from "./utils.js";
+import {territoriesBenefits, territoriesName} from "./db/territories.js";
+
 
 const app = express();
 
@@ -21,6 +23,10 @@ let users = characters;
 let turnNumber = 1;
 let cycleNumber = 1;
 let activeDecrees = [];
+let territories = [];
+
+let workerPrice = 600;
+let registerPrice = 200;
 
 const handleRequestUserList = (socket) => {
     socket.emit("receive_userList", users)
@@ -54,17 +60,80 @@ const handleUpdateCharacterStatus = ({ charName, status }) => {
 
 const handleGameStart = () => {
     definePlayerOrder();
+    territories = setTerritoriesValues();
     turnNumber = 1;
+    cycleNumber = 1;
     io.emit("server_start_game")
     console.log("start game")
 }
 
-const onTurnStart = () => {
+const handleGameState = () => {
+    if (turnNumber <= users.size) {
+    turnNumber++;
+  } else {
+    turnNumber = 1;
+    cycleNumber++;
+  }
+
+  io.emit("turn_and_cycle", {turnNumber, cycleNumber})
+}
+
+const setTerritoriesValues = () => {
+    const randomTerritoriesValues = territoriesBenefits;
+    const territoriesToAssign = territoriesName;
+    const shuffledTerritories = shuffleArray(randomTerritoriesValues);
+    
+    const finishedTerritories = territoriesToAssign.map((territory, index) => ({
+        ...territory,
+        ...shuffledTerritories[index],
+    }))
+
+    console.log(finishedTerritories, "frini")
+    return finishedTerritories;
+}
+
+const getTerritoriesIncome = (username) => {
+    const foundUser = findUserByCharacterName(username)
+    const territories = foundUser.territories
+    const territoriesCodes = territories.forEach(getTerritoryIncome())
+}
+
+const getTerritoryIncome = (id) => {
+    const territory = findTerritoryByCode(id);
+    const netIncome = territory.credits;
+    const tenants = territory.players.size
+    const realincome = netIncome/tenants;
+    return realincome;
+}
+
+const findUserByCharacterName = (username) => {
+    return users.find(user => user.characterName = username)
+}
+
+const findTerritoryByCode = (code) => {
+    const territory = territories.find(territory = territory.id === code)
+    return territory
+}
+
+const setInitialDecrees = () => {
 
 }
 
+const whoseTurnIsIT = () => {
+    const userWithTurnIs = users.find(users.find(u => u.status === active))
+    return userWithTurnIs.characterName;
+}
+
+const onTurnStart = () => {
+    if(cycleNumber === 1){
+
+    } else{
+        getTerritoriesIncome(whoseTurnIsIT())
+    }
+}
+
 const onCycleStart = () => {
-    
+
 }
 
 io.on("connection", (socket) => {   
@@ -73,6 +142,7 @@ io.on("connection", (socket) => {
     socket.on("request_userList", () => handleRequestUserList(socket));
     socket.on("update_character_status", handleUpdateCharacterStatus);
     socket.on("client_start_game", handleGameStart)
+    socket.on("finish_turn", handleGameState)
 }
 )
 
