@@ -5,6 +5,7 @@ import { Server } from "socket.io";
 import cors from "cors";
 import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
+import socket from "../client/src/socket.js";
 
 
 const app = express();
@@ -96,7 +97,9 @@ const setTerritoriesValues = () => {
         ...shuffledTerritories[index],
     }))
 
+    console.log("territories", finishedTerritories)
     return finishedTerritories;
+    
 }
 
 const getTerritoriesIncome = (username) => {
@@ -106,6 +109,7 @@ const getTerritoriesIncome = (username) => {
         (sum, t) => sum + getTerritoryIncome(t), 0
     );
 
+    console.log(combinedTerritoriesIncome)
     return combinedTerritoriesIncome;
 }
 
@@ -117,12 +121,16 @@ const getTerritoryIncome = (id) => {
     return realincome;
 }
 
-const findUserByCharacterName = (username) => {
-    return users.find(user => user.characterName === username)
-}
+const findUserByCharacterName = (name) => {
+  const found = users.find(u => u.characterName === name);
+  if (!found) {
+    console.error("findUserByCharacterName: No user found for", name);
+  }
+  return found;
+};
 
 const findTerritoryByCode = (code) => {
-    const territory = territories.find(t = t.id === code)
+    const territory = territories.find(t => t.id === code)
     return territory
 }
 
@@ -161,6 +169,45 @@ const onCycleStart = () => {
 
 }
 
+const findUserTerritories = (userName) => {
+  const foundUser = findUserByCharacterName(userName);
+  if (!foundUser) {
+    console.error("findUserTerritories: cannot find user", userName);
+    return []; 
+  }
+  return foundUser.territories;
+};
+
+const setTerritoryControl = ({ user, territoryId }) => {
+  const foundUserTerritories = findUserTerritories(user);
+  const foundTerritory = findTerritoryByCode(Number(territoryId)); 
+
+  if (!foundUserTerritories || !foundTerritory) {
+    console.error("setTerritoryControl: invalid user or territory", { user, territoryId });
+    return;
+  }
+
+  if (foundUserTerritories.includes(territoryId)) {
+    const filtered = foundUserTerritories.filter(t => t !== territoryId);
+    foundUserTerritories.splice(0, foundUserTerritories.length, ...filtered);
+  } else {
+    foundUserTerritories.push(territoryId);
+  }
+
+  if (foundTerritory.players.includes(user)) {
+    const filtered = foundTerritory.players.filter(u => u !== user);
+    foundTerritory.players.splice(0, foundTerritory.players.length, ...filtered);
+  } else {
+    foundTerritory.players.push(user);
+  }
+
+  console.log("setting control")
+  io.emit("receive_territories_data", territories)
+};
+
+
+
+
 io.on("connection", (socket) => {   
     console.log("user connected: ", socket.id)
 
@@ -168,6 +215,7 @@ io.on("connection", (socket) => {
     socket.on("update_character_status", handleUpdateCharacterStatus);
     socket.on("client_start_game", handleGameStart)
     socket.on("finish_turn", handleGameState)
+    socket.on("set_territory_control", setTerritoryControl)
 }
 )
 

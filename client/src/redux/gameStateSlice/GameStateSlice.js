@@ -4,6 +4,7 @@ const initialState = {
     turn: 1,
     cycle: 1,
     status: false, // I FORGOR :(
+    territories: [],
 }
 
 const gameStateSlice = createSlice({
@@ -18,9 +19,12 @@ const gameStateSlice = createSlice({
         },
         updateGameStatus: (state, action) => {
             state.status = action.payload
+        },
+        updateTerritories: (state,action) => {
+            state.territories = action.payload
         }
     }
 })
 
-export const {updateTurn, updateCycle, updateGameStatus} = gameStateSlice.actions;
+export const {updateTurn, updateCycle, updateGameStatus, updateTerritories} = gameStateSlice.actions;
 export default gameStateSlice.reducer;

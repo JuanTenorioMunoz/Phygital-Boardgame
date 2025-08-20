@@ -1,5 +1,4 @@
 const decrees = [
-
   {
     id: "a1f3b9c2",
     title: "Servicio obligatorio",
@@ -60,7 +59,6 @@ const decrees = [
     title: "Duplica registro",
     desc: "El costo de escaneo se duplica y pasa a 600 Cr durante 3 ciclos o hasta que el decreto deje de estar vigente.",
   },
-
   {
     id: "d1f7a9c3",
     title: "Carreteras orbitales",
@@ -111,7 +109,6 @@ const decrees = [
     title: "Protege los recursos hídricos",
     desc: "Da 1 barrera por territorio de agua que ocupe cada jugador (puede bloquear una frontera de cada hexágono).",
   },
-
   {
     id: "a7f2c8d5",
     title: "Sufragio ponderado",
@@ -147,7 +144,50 @@ const decrees = [
     title: "Moción de orden",
     desc: "El ciclo siguiente al ser votado este decreto solo se pueden proponer 2 decretos en total (elegidos al azar entre los propuestos).",
   },
+
+  //DECRETOS RECIEN AÑADIDOS
+  {
+    id: "g1h2i3j4",
+    title: "Peaje global",
+    desc: "Al entrar a cualquier territorio ocupado, paga 100 Cr a cada ocupante.",
+  },
+  {
+    id: "k5l6m7n8",
+    title: "Licencias compartidas",
+    desc: "Si compartes un territorio 2 ciclos seguidos con el mismo rival, ambos cobran 100 Cr del Banco por cada territorio así compartido.",
+  },
+  {
+    id: "o9p1q2r3",
+    title: "Intercambio de concesiones",
+    desc: "Puedes comprar control total de un territorio (no adyacente) a otro jugador, con acuerdo mutuo. Solo dura 1 ciclo. (registro al Banco se reintegra al comprador).",
+  },
+  {
+    id: "s4t5u6v7",
+    title: "Auditoría",
+    desc: "Al final del ciclo, si revelas públicamente 1 de tus valores de territorio (a elección); cobra 100 Cr del Banco.",
+  },
+  {
+    id: "w8x9y1z2",
+    title: "Embargo selectivo de Desiertos",
+    desc: "Nadie puede entrar a territorios de desierto mientras este decreto esté vigente.",
+  },
+  {
+    id: "a2b3c4d5",
+    title: "Lluvia de decretos",
+    desc: "Antes de la votación, cada jugador puede comprar 1 carta de decretos por 200 Cr.",
+  },
+  {
+    id: "e6f7g8h9",
+    title: "Protección diplomática",
+    desc: "Si alguien rompe una alianza, debe pagar 200 Cr a su ex aliado. (si ambos rompen, pagan 100 Cr al Banco cada uno).",
+  },
+  {
+    id: "i1j2k3l4",
+    title: "Alianza de Comercio Justo",
+    desc: "Si dos jugadores realizan una transacción ≥400 Cr, cada uno cobra 100 Cr del Banco.",
+  },
 ];
+
 
 const initialDecrees = [
   {
