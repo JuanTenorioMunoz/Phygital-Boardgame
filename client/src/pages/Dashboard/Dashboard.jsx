@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useSocket } from '../../SocketProvider'
 
 const Dashboard = () => {
+  const socket = useSocket();
 
   const turnNumber = useSelector((state) => state.gameState.turn)
   const cycleNumber = useSelector((state) => state.gameState.cycle)
 
   const handleEndTurn = () => {
-
+    socket.emit("finish_turn")
   }
 
   useEffect(() => {

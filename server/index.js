@@ -3,7 +3,7 @@ import characters from "./db/characters.js";
 import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-import shuffleArray from "./utils.js";
+import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
 
 
@@ -47,12 +47,15 @@ const definePlayerOrder = () => {
             user.turnOrder = ""
         }
     })
+
+    console.log("OREDER", users)
 }
 
 const handleUpdateCharacterStatus = ({ charName, status }) => {
     const user = users.find(u => u.characterName === charName);
     if (user) {
         user.status = status;
+        console.log("UPDATED USERCITO", user);
     }
 
     io.emit("receive_userList", users);
@@ -68,7 +71,12 @@ const handleGameStart = () => {
 }
 
 const handleGameState = () => {
-    if (turnNumber <= users.length) {
+
+    const activeUsers = users.filter(user => user.status === true)
+    console.log(activeUsers.length)
+
+
+    if (turnNumber < activeUsers.length) {
     turnNumber++;
   } else {
     turnNumber = 1;
@@ -88,7 +96,6 @@ const setTerritoriesValues = () => {
         ...shuffledTerritories[index],
     }))
 
-    console.log(finishedTerritories, "frini")
     return finishedTerritories;
 }
 
@@ -146,7 +153,7 @@ const onTurnStart = () => {
         const currentCredits = getPlayerCredits(currentPlayer);
         const territoriesIncome = getTerritoriesIncome(currentPlayer);
         const newCredits = setPlayerCredits(currentPlayer, currentCredits + territoriesIncome)
-        console.log(newCredits)
+        console.log("NEW CREDTIS", currentPlayer, newCredits)
     }
 }
 
