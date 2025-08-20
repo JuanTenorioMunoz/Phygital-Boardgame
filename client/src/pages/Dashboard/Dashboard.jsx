@@ -6,6 +6,7 @@ const Dashboard = () => {
   const socket = useSocket();
   const user = useSelector((state) => state.player)
   const territories = useSelector((state) => state.gameState.territories)
+  const users = useSelector((state) => state.users)
 
   const [territoryId, setTerritoryID] = useState();
 
@@ -15,6 +16,7 @@ const Dashboard = () => {
   const setTerritoryControl = (territoryId) =>{
     socket.emit("set_territory_control", {user, territoryId})
     console.log(territories)
+    console.log("users", users)
   }
 
 
