@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useSocket } from '../../SocketProvider'
+import HorizontalCard from '../../components/HorizontalCard/HorizontalCard';
 
 const Dashboard = () => {
   const socket = useSocket();
   const user = useSelector((state) => state.player)
   const territories = useSelector((state) => state.gameState.territories)
   const users = useSelector((state) => state.users)
+  const activeUsers = users.filter(user => user.status === true)
 
   const [territoryId, setTerritoryID] = useState();
 
@@ -35,8 +37,11 @@ const Dashboard = () => {
     <input onChange={(e) => setTerritoryID(e.target.value)}></input>
     <button onClick={() => setTerritoryControl(territoryId)}></button>
     <button onClick={handleEndTurn}>End turn</button>
-
-    <div className='active-users'></div>
+    <div className='active-users'>
+      {activeUsers.map((user) => {
+        return(<HorizontalCard charName={user.characterName} credits={user.credits}></HorizontalCard>)
+      })}
+    </div>
     </>
   )
 }

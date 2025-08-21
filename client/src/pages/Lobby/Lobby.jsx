@@ -58,7 +58,7 @@ const Lobby = () => {
           })}
       </div>
 
-      <div className='available-characters'>
+      <div className='selected-characters'>
         <h1>Current players:</h1>
         {userList
           .filter(user => user.status === true) 
