@@ -37,7 +37,7 @@ const QRScanner = () => {
 
     return(
         <>
-        { scanResult ? console.log(scanResult) : <div id="reader"></div>}
+        { scanResult ? <div>{scanResult}</div>: <div id="reader"></div>}
         </>
     )
 }
