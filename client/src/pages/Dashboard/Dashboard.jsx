@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useSocket } from '../../SocketProvider'
 import HorizontalCard from '../../components/HorizontalCard/HorizontalCard';
 import QRScanner from '../../components/QRScanner/QRScanner';
+import { useNavigate } from 'react-router';
 
 const Dashboard = () => {
   const socket = useSocket();
@@ -10,6 +11,7 @@ const Dashboard = () => {
   const territories = useSelector((state) => state.gameState.territories)
   const users = useSelector((state) => state.users)
   const activeUsers = users.filter(user => user.status === true)
+  const navigate = useNavigate();
 
   const [territoryId, setTerritoryID] = useState();
 
@@ -27,12 +29,16 @@ const Dashboard = () => {
     socket.emit("finish_turn")
   }
 
+  const goToQR = () => {
+    navigate("/QR")
+  }
+
   useEffect(() => {
   }, [])
 
   return (
     <>
-    <QRScanner></QRScanner>
+    <button onClick={goToQR}></button>
     <h1>Dashboardcito</h1>
     <div>Turn: {turnNumber}</div>
     <div>Cycle: {cycleNumber}</div>

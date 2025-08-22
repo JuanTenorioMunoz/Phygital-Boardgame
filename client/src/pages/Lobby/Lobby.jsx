@@ -40,6 +40,7 @@ const Lobby = () => {
     if (gameStatus) {
       navigate("/dashboard");
     }
+    
   }, [gameStatus, socket])
 
   return (
