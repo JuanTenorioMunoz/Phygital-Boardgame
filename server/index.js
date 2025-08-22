@@ -6,6 +6,7 @@ import cors from "cors";
 import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
 import socket from "../client/src/socket.js";
+import { error } from "console";
 
 
 const app = express();
@@ -31,6 +32,23 @@ let registerPrice = 200;
 
 const handleRequestUserList = (socket) => {
     socket.emit("receive_userList", users)
+}
+
+const handleGameState = () => {
+
+    const activeUsers = users.filter(user => user.status === true)
+    console.log(activeUsers.length)
+
+    onTurnStart();
+
+    if (turnNumber < activeUsers.length) {
+    turnNumber++;
+  } else {
+    turnNumber = 1;
+    cycleNumber++;
+  }
+
+  io.emit("turn_and_cycle", {turnNumber, cycleNumber})
 }
 
 const definePlayerOrder = () => {
@@ -71,21 +89,6 @@ const handleGameStart = () => {
     console.log("start game")
 }
 
-const handleGameState = () => {
-
-    const activeUsers = users.filter(user => user.status === true)
-    console.log(activeUsers.length)
-
-
-    if (turnNumber < activeUsers.length) {
-    turnNumber++;
-  } else {
-    turnNumber = 1;
-    cycleNumber++;
-  }
-
-  io.emit("turn_and_cycle", {turnNumber, cycleNumber})
-}
 
 const setTerritoriesValues = () => {
     const randomTerritoriesValues = territoriesBenefits;
@@ -109,7 +112,7 @@ const getTerritoriesIncome = (username) => {
         (sum, t) => sum + getTerritoryIncome(t), 0
     );
 
-    console.log(combinedTerritoriesIncome)
+    console.log("combine", combinedTerritoriesIncome)
     return combinedTerritoriesIncome;
 }
 
@@ -118,6 +121,7 @@ const getTerritoryIncome = (id) => {
     const netIncome = territory.credits;
     const tenants = territory.players.length
     const realincome = netIncome/tenants;
+    console.log(id, "has this much money", realincome)
     return realincome;
 }
 
@@ -130,13 +134,22 @@ const findUserByCharacterName = (name) => {
 };
 
 const findTerritoryByCode = (code) => {
-    const territory = territories.find(t => t.id === code)
-    return territory
-}
+  const territory = territories.find(t => t.id === Number(code));
+  if (!territory) {
+    console.error(error);
+  }
+  return territory;
+};
 
 const setPlayerCredits = (username, value) => {
     const foundUser = findUserByCharacterName(username);
+    if (!foundUser) {
+        console.error(`User not found: "${username}"`);
+        return null;
+    }
+
     foundUser.credits = value;
+    return foundUser.credits; 
 }
 
 const setInitialDecrees = () => {
@@ -145,6 +158,9 @@ const setInitialDecrees = () => {
 
 const whoseTurnIsIT = () => {
     const userWithTurnIs = users.find(u => u.turnOrder === turnNumber);
+    if(!userWithTurnIs){
+      console.error(error);
+    }
     return userWithTurnIs.characterName;
 }
 
@@ -179,31 +195,37 @@ const findUserTerritories = (userName) => {
 };
 
 const setTerritoryControl = ({ user, territoryId }) => {
-  const foundUserTerritories = findUserTerritories(user);
-  const foundTerritory = findTerritoryByCode(Number(territoryId)); 
+  const foundUser = findUserByCharacterName(user);
+  const foundTerritory = findTerritoryByCode(Number(territoryId));
 
-  if (!foundUserTerritories || !foundTerritory) {
+  if (!foundUser || !foundTerritory) {
     console.error("setTerritoryControl: invalid user or territory", { user, territoryId });
     return;
   }
 
-  if (foundUserTerritories.includes(territoryId)) {
-    const filtered = foundUserTerritories.filter(t => t !== territoryId);
-    foundUserTerritories.splice(0, foundUserTerritories.length, ...filtered);
+  // --- Update the user's territories ---
+  if (foundUser.territories.includes(territoryId)) {
+    // Remove control
+    foundUser.territories = foundUser.territories.filter(t => t !== territoryId);
   } else {
-    foundUserTerritories.push(territoryId);
+    // Add control
+    foundUser.territories.push(territoryId);
   }
 
+  // --- Update the territory's players ---
   if (foundTerritory.players.includes(user)) {
-    const filtered = foundTerritory.players.filter(u => u !== user);
-    foundTerritory.players.splice(0, foundTerritory.players.length, ...filtered);
+    foundTerritory.players = foundTerritory.players.filter(u => u !== user);
   } else {
     foundTerritory.players.push(user);
   }
 
-  console.log("setting control")
-  io.emit("receive_territories_data", territories)
+  console.log("Updated territories:", foundUser.characterName, foundUser.territories);
+
+  // Send updated data to clients
+  io.emit("receive_territories_data", territories);
+  io.emit("receive_userList", users); // so Redux users state updates too
 };
+
 
 
 

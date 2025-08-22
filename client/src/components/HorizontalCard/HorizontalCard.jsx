@@ -1,4 +1,6 @@
-const HorizontalCard = ({charName, onClick, credits}) => {
+import './HorizontalCard.css'
+
+const HorizontalCard = ({charName, onClick, credits, territories}) => {
     return(
         <>
             <div className="horizontal-card" onClick={(onClick)}>
