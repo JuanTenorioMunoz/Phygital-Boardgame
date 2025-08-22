@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useSocket } from '../../SocketProvider'
 import HorizontalCard from '../../components/HorizontalCard/HorizontalCard';
+import QRScanner from '../../components/QRScanner/QRScanner';
 
 const Dashboard = () => {
   const socket = useSocket();
@@ -31,6 +32,7 @@ const Dashboard = () => {
 
   return (
     <>
+    <QRScanner></QRScanner>
     <h1>Dashboardcito</h1>
     <div>Turn: {turnNumber}</div>
     <div>Cycle: {cycleNumber}</div>
