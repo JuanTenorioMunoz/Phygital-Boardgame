@@ -1,12 +1,12 @@
 const startingCredits = 800
 
 const characters = [
-    {characterName: "Veyra Korr", status: false, credits: startingCredits, territories: [], turnOrder:""},
-    {characterName: "Dravik Holt", status: false, credits: startingCredits, territories: [], turnOrder:""},
-    {characterName: "Selene Veyth", status: false, credits: startingCredits, territories: [], turnOrder:""},
-    {characterName: "Kael Orion", status: false, credits: startingCredits, territories: [], turnOrder:""},
-    {characterName: "Morganna Flux", status: false, credits: startingCredits, territories: [], turnOrder:""},
-    {characterName: "Zerax Kane", status: false, credits: startingCredits, territories: [], turnOrder:""},
+    {characterName: "Veyra Korr", status: false, credits: startingCredits, territories: [], turnOrder:"", portrait: "/assets/characters/Veyra Korr.png"},
+    {characterName: "Dravik Holt", status: false, credits: startingCredits, territories: [], turnOrder:"", portrait: "../assets/characters/Dravik Holt.png"},
+    {characterName: "Selene Veyth", status: false, credits: startingCredits, territories: [], turnOrder:"", portrait: "../assets/characters/Selene Veyth.png"},
+    {characterName: "Kael Orion", status: false, credits: startingCredits, territories: [], turnOrder:"", portrait: "../assets/characters/Kael Orion.png"},
+    {characterName: "Morganna Flux", status: false, credits: startingCredits, territories: [], turnOrder:"", portrait: "../assets/characters/Morganna Flux.png"},
+    {characterName: "Zerax Kane", status: false, credits: startingCredits, territories: [], turnOrder:"", portrait: "../assets/characters/Zerax Kane.png"},
 ]
 
 export default characters;

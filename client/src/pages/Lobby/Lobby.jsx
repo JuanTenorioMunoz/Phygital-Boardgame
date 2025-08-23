@@ -55,7 +55,7 @@ const Lobby = () => {
         {userList
           .filter(user => user.status === false) 
           .map((user)=>{
-            return(<CharCard charName={user.characterName} onClick={() => selectCharacter(user.characterName)}></CharCard>)
+            return(<CharCard charName={user.characterName} image={user.portrait} onClick={() => selectCharacter(user.characterName)}></CharCard>)
           })}
       </div>
 
@@ -64,7 +64,7 @@ const Lobby = () => {
         {userList
           .filter(user => user.status === true) 
           .map((user)=>{
-            return(<CharCard charName={user.characterName}></CharCard>)
+            return(<CharCard charName={user.characterName} image={user.portrait}></CharCard>)
           })}
       </div>
     </>
