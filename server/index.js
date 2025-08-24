@@ -203,16 +203,12 @@ const setTerritoryControl = ({ user, territoryId }) => {
     return;
   }
 
-  // --- Update the user's territories ---
   if (foundUser.territories.includes(territoryId)) {
-    // Remove control
     foundUser.territories = foundUser.territories.filter(t => t !== territoryId);
   } else {
-    // Add control
     foundUser.territories.push(territoryId);
   }
 
-  // --- Update the territory's players ---
   if (foundTerritory.players.includes(user)) {
     foundTerritory.players = foundTerritory.players.filter(u => u !== user);
   } else {
@@ -221,9 +217,13 @@ const setTerritoryControl = ({ user, territoryId }) => {
 
   console.log("Updated territories:", foundUser.characterName, foundUser.territories);
 
-  // Send updated data to clients
   io.emit("receive_territories_data", territories);
-  io.emit("receive_userList", users); // so Redux users state updates too
+  io.emit("receive_userList", users); 
+};
+
+const decreeHandler = (newDecree) => {
+  activeDecrees.shift();
+  activeDecrees.push(newDecree);
 };
 
 

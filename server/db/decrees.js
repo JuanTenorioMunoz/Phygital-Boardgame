@@ -145,7 +145,6 @@ const decrees = [
     desc: "El ciclo siguiente al ser votado este decreto solo se pueden proponer 2 decretos en total (elegidos al azar entre los propuestos).",
   },
 
-  //DECRETOS RECIEN AÑADIDOS
   {
     id: "g1h2i3j4",
     title: "Peaje global",
