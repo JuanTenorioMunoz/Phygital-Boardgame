@@ -25,6 +25,7 @@ let users = characters;
 let turnNumber = 1;
 let cycleNumber = 1;
 let activeDecrees = [];
+let decreesToVote = [];
 let territories = [];
 
 let workerPrice = 600;

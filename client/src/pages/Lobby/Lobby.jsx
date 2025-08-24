@@ -15,11 +15,13 @@ const Lobby = () => {
   
   const userList = useSelector((state) => state.users)
   const user = useSelector((state) => state.player)
+  const savedChar = localStorage.getItem("playerChar");
 
   const selectCharacter = (charName) => {
-        socket.emit("update_character_status", {charName, status:true})
-        dispatch(updatePlayer(charName))
-  }
+    localStorage.setItem("playerChar", charName);
+    socket.emit("update_character_status", { charName, status: true });
+    dispatch(updatePlayer(charName));
+};
 
   const startGame = () =>{
     socket.emit("client_start_game")
@@ -40,6 +42,11 @@ const Lobby = () => {
     if (gameStatus) {
       navigate("/dashboard");
     }
+
+    if (savedChar) {
+      socket.emit("update_character_status", { charName: savedChar, status: true });
+      dispatch(updatePlayer(savedChar));
+  }
     
   }, [gameStatus, socket])
 

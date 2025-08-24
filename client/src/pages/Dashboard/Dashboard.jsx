@@ -40,6 +40,7 @@ const Dashboard = () => {
     <>
     <button onClick={goToQR}></button>
     <h1>Dashboardcito</h1>
+    <div>You are: {user} </div>
     <div>Turn: {turnNumber}</div>
     <div>Cycle: {cycleNumber}</div>
     <input onChange={(e) => setTerritoryID(e.target.value)}></input>
