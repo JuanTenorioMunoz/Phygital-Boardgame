@@ -43,11 +43,6 @@ const Lobby = () => {
       navigate("/dashboard");
     }
 
-    if (savedChar) {
-      socket.emit("update_character_status", { charName: savedChar, status: true });
-      dispatch(updatePlayer(savedChar));
-  }
-    
   }, [gameStatus, socket])
 
   return (

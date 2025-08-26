@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useSocket } from '../../SocketProvider'
 import HorizontalCard from '../../components/HorizontalCard/HorizontalCard';
-import QRScanner from '../../components/QRScanner/QRScanner';
 import { useNavigate } from 'react-router';
 import DecreeCard from '../../components/DecreeCard/DecreeCard';
+import { arrayObjectParamValuesFinder } from '../../utils/utils';
+import Navbar from '../../components/Navbar/Navbar';
 
 const Dashboard = () => {
   const socket = useSocket();
@@ -13,6 +14,8 @@ const Dashboard = () => {
   const users = useSelector((state) => state.users)
   const activeUsers = users.filter(user => user.status === true)
   const decrees = useSelector((state) => state.gameState.decrees)
+
+  const playerCredits = arrayObjectParamValuesFinder(users, "characterName", user, "credits")
 
   const navigate = useNavigate();
 
@@ -36,13 +39,19 @@ const Dashboard = () => {
     navigate("/QR")
   }
 
+  const goToTerritory = () => {
+    navigate("/territory")
+  }
+
   useEffect(() => {
   }, [])
 
   return (
     <>
-    <button onClick={goToQR}></button>
-    <h1>Dashboardcito</h1>
+    <div className='options'>
+      <Navbar></Navbar>
+    </div>
+    <h1>Credits: {playerCredits}</h1>
     <div>You are: {user} </div>
     <div>Turn: {turnNumber}</div>
     <div>Cycle: {cycleNumber}</div>

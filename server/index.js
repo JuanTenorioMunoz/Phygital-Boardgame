@@ -21,13 +21,17 @@ const io = new Server(server, {
         origin: "*",
     }
 })
-//
+
 let users = characters;
 let turnNumber = 1;
 let cycleNumber = 1;
 let activeDecrees = [];
-let decreesToVote = [];
 let territories = [];
+
+let decreesToVote = [];
+let inFavor = [];
+let against = [];
+const votingTime = [];
 
 const decreesList = decrees;
 const initialDecreesList = initialDecrees;

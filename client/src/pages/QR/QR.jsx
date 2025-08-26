@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux'
 import { useSocket } from '../../SocketProvider'
 import QRScanner from '../../components/QRScanner/QRScanner';
 import { useNavigate } from 'react-router';
+import Navbar from '../../components/Navbar/Navbar';
 
 const QR = () => {
   useEffect(() => {
   }, [])
 
   return (
-    <>
-        <QRScanner></QRScanner>
+    <>  
+      <Navbar></Navbar>
+      <QRScanner></QRScanner>
     </>
   )
 }
