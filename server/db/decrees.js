@@ -236,4 +236,4 @@ const initialDecrees = [
   },
 ];
 
-export default {decrees, initialDecrees}
+export { decrees, initialDecrees }

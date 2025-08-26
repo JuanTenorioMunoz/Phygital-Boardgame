@@ -2,6 +2,7 @@ import {Html5QrcodeScanner} from "html5-qrcode"
 import { useEffect, useState } from "react";
 import { useSocket } from "../../SocketProvider";
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
  
 const QRScanner = () => {
@@ -15,13 +16,11 @@ const QRScanner = () => {
 
     const setTerritoryControl = (territoryId) =>{
         socket.emit("set_territory_control", {user, territoryId})
-        console.log(territories)
         console.log("users", users)
     }
 
     const setDecreeForVoting = (decreeID) =>{
         socket.emit("set_territory_control", {user, decreeID})
-        console.log(territories)
         console.log("users", users)
     }
 
@@ -39,8 +38,8 @@ const QRScanner = () => {
     const success = (result) => {
         scanner.clear();
         setScanResult(result);
-        socket.emit("set_territory_control", {user, scanResult})
-    }
+        socket.emit("set_territory_control", { user, scanResult: result });
+    };
 
     const error = (err) => {
         console.warn(err)

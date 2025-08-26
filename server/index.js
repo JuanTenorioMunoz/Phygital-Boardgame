@@ -7,8 +7,7 @@ import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
 import socket from "../client/src/socket.js";
 import { error } from "console";
-import decrees from "./db/decrees.js";
-import initialDecrees from "./db/decrees.js";
+import { decrees, initialDecrees } from "./db/decrees.js";
 
 
 const app = express();
@@ -246,6 +245,7 @@ const getRandomOrder = (array) => {
 
 io.on("connection", (socket) => {   
     console.log("user connected: ", socket.id)
+    console.log(initialDecrees)
 
     socket.on("request_userList", () => handleRequestUserList(socket));
     socket.on("update_character_status", handleUpdateCharacterStatus);

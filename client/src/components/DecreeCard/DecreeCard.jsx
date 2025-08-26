@@ -1,11 +1,10 @@
 
-const DecreeCard = ({charName, onClick, credits, image}) => {
+const DecreeCard = ({decreeName, type, desc}) => {
     return(
         <>
-            <div className="horizontal-card" onClick={(onClick)}>
-                <img className="character-image" src={image}></img>
-                <h1 className="character-name">{charName}</h1>
-                <h2 className="character-credits">{credits}</h2>
+            <div className="decree-card">
+                <h1 className="decree-name">{decreeName}</h1>
+                <h2 className="decree-desc">{desc}</h2>
             </div>
         </>
     )

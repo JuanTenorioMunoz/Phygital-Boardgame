@@ -4,6 +4,7 @@ import { useSocket } from '../../SocketProvider'
 import HorizontalCard from '../../components/HorizontalCard/HorizontalCard';
 import QRScanner from '../../components/QRScanner/QRScanner';
 import { useNavigate } from 'react-router';
+import DecreeCard from '../../components/DecreeCard/DecreeCard';
 
 const Dashboard = () => {
   const socket = useSocket();
@@ -12,7 +13,7 @@ const Dashboard = () => {
   const users = useSelector((state) => state.users)
   const activeUsers = users.filter(user => user.status === true)
   const decrees = useSelector((state) => state.gameState.decrees)
-  
+
   const navigate = useNavigate();
 
   const [territoryId, setTerritoryID] = useState();
@@ -48,6 +49,13 @@ const Dashboard = () => {
     <input onChange={(e) => setTerritoryID(e.target.value)}></input>
     <button onClick={() => setTerritoryControl(territoryId)}></button>
     <button onClick={handleEndTurn}>End turn</button>
+
+    <div className="active-decrees">
+      {decrees && decrees.map((decree) => (
+      <DecreeCard decreeName={decree.title} />
+      ))}
+    </div>
+
     <div className='active-users'>
       {activeUsers.map((user) => {
         return(<HorizontalCard charName={user.characterName} credits={user.credits}></HorizontalCard>)
