@@ -38,7 +38,7 @@ const QRScanner = () => {
     const success = (result) => {
         scanner.clear();
         setScanResult(result);
-        socket.emit("set_territory_control", { user, scanResult: result });
+        socket.emit("set_territory_control", { user, scanResult});
         navigate("/dashboard")
     };
 
