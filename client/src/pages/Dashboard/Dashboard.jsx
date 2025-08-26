@@ -11,6 +11,8 @@ const Dashboard = () => {
   const territories = useSelector((state) => state.gameState.territories)
   const users = useSelector((state) => state.users)
   const activeUsers = users.filter(user => user.status === true)
+  const decrees = useSelector((state) => state.gameState.decrees)
+  
   const navigate = useNavigate();
 
   const [territoryId, setTerritoryID] = useState();

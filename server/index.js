@@ -7,6 +7,8 @@ import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
 import socket from "../client/src/socket.js";
 import { error } from "console";
+import decrees from "./db/decrees.js";
+import initialDecrees from "./db/decrees.js";
 
 
 const app = express();
@@ -27,6 +29,9 @@ let cycleNumber = 1;
 let activeDecrees = [];
 let decreesToVote = [];
 let territories = [];
+
+const decreesList = decrees;
+const initialDecreesList = initialDecrees;
 
 let workerPrice = 600;
 let registerPrice = 200;
@@ -83,6 +88,7 @@ const handleUpdateCharacterStatus = ({ charName, status }) => {
 
 const handleGameStart = () => {
     definePlayerOrder();
+    setInitialDecrees();
     territories = setTerritoriesValues();
     turnNumber = 1;
     cycleNumber = 1;
@@ -154,7 +160,10 @@ const setPlayerCredits = (username, value) => {
 }
 
 const setInitialDecrees = () => {
+    const shuffle = getRandomOrder(initialDecreesList)
+    activeDecrees = shuffle.slice(0,3)
 
+    io.emit("send_current_decrees", activeDecrees)
 }
 
 const whoseTurnIsIT = () => {
@@ -227,7 +236,11 @@ const decreeHandler = (newDecree) => {
   activeDecrees.push(newDecree);
 };
 
+const getRandomOrder = (array) => {
 
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled
+};
 
 
 

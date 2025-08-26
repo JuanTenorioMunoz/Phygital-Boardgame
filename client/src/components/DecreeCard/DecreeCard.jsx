@@ -1,5 +1,5 @@
 
-const HorizontalCard = ({charName, onClick, credits, image}) => {
+const DecreeCard = ({charName, onClick, credits, image}) => {
     return(
         <>
             <div className="horizontal-card" onClick={(onClick)}>
@@ -11,4 +11,4 @@ const HorizontalCard = ({charName, onClick, credits, image}) => {
     )
 }
 
-export default HorizontalCard
+export default DecreeCard

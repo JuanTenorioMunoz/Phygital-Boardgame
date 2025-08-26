@@ -1,7 +1,7 @@
 import socket from "./socket";
 import React, { createContext, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateCycle, updateGameStatus, updateTerritories, updateTurn } from "./redux/gameStateSlice/GameStateSlice";
+import { updateCycle, updateDecrees, updateGameStatus, updateTerritories, updateTurn } from "./redux/gameStateSlice/GameStateSlice";
 import { setUsers } from "./redux/usersSlice/UsersSlice";
 
 const SocketContext = createContext(socket);
@@ -37,11 +37,16 @@ export const SocketProvider = ({ children }) => {
         console.log(territories)
     }
 
+    const handleDecrees = (decrees) => {
+        dispatch(updateDecrees(decrees))
+    }
+
     socket.on("update_turn", handleUpdateTurn);
     socket.on("receive_userList", handleUserList);
     socket.on("server_start_game", handleStartGame);
     socket.on("turn_and_cycle", handleTurnAndCycle);
     socket.on("receive_territories_data", handleTerritoriesData)
+    socket.on("send_current_decrees", handleDecrees)
 
     return () => {
       socket.off("update_turn");
@@ -49,6 +54,7 @@ export const SocketProvider = ({ children }) => {
       socket.off("server_start_game");
       socket.off("turn_and_cycle");
       socket.off("receive_territories_data")
+      socket.off("send_current_decrees")
     };
     }, [dispatch]);
 

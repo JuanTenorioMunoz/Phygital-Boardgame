@@ -3,8 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     turn: 1,
     cycle: 1,
-    status: false, // I FORGOR :(
+    status: false, 
     territories: [],
+    decrees: [],
 }
 
 const gameStateSlice = createSlice({
@@ -22,9 +23,12 @@ const gameStateSlice = createSlice({
         },
         updateTerritories: (state,action) => {
             state.territories = action.payload
+        },
+        updateDecrees: (state,action) => {
+            state.decrees = action.payload
         }
     }
 })
 
-export const {updateTurn, updateCycle, updateGameStatus, updateTerritories} = gameStateSlice.actions;
+export const {updateTurn, updateCycle, updateGameStatus, updateTerritories, updateDecrees} = gameStateSlice.actions;
 export default gameStateSlice.reducer;
