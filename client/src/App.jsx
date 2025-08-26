@@ -10,9 +10,7 @@ function App() {
   return (
     <Provider store={store}>
       <SocketProvider>
-        <PersistenceProvider>
           <Router />
-        </PersistenceProvider>
       </SocketProvider>
     </Provider>
   )

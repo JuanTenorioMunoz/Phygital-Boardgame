@@ -18,7 +18,6 @@ const Lobby = () => {
   const savedChar = localStorage.getItem("playerChar");
 
   const selectCharacter = (charName) => {
-    localStorage.setItem("playerChar", charName);
     socket.emit("update_character_status", { charName, status: true });
     dispatch(updatePlayer(charName));
 };
