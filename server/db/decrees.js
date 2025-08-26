@@ -229,11 +229,6 @@ const initialDecrees = [
     title: "Servicio Obligatorio",
     desc: "Al principio del turno de cada jugador, este recibe 1 trabajador sin pagar su costo (se aplica 1 vez).",
   },
-  {
-    id: "e4b9c2f6",
-    title: "Barrera Temporal",
-    desc: "Se concede una barrera frontal gratuita a quien la solicite este ciclo. Una barrera puede bloquear una de las 6 fronteras de cada hexágono.",
-  },
 ];
 
 export { decrees, initialDecrees }

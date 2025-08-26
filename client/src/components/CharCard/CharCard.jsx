@@ -8,7 +8,8 @@ const CharCard = ({ charName, onClick, image }) => {
       <img 
         src={image} 
         alt={charName} 
-        className="w-60 h-60 object-contain rounded-3xl"
+        style={{ width: "100px", height: "140px" }}
+        className="max-w-1 max-h-1 object-contain rounded-3xl"
       />
     </div>
   )

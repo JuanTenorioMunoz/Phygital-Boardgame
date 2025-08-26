@@ -96,6 +96,7 @@ const handleGameStart = () => {
     turnNumber = 1;
     cycleNumber = 1;
     io.emit("server_start_game")
+    io.emit("receive_territories_data", territories);
     console.log("start game")
 }
 
@@ -158,7 +159,8 @@ const setPlayerCredits = (username, value) => {
         return null;
     }
 
-    foundUser.credits = value;
+    foundUser.credits = Number(value); 
+    io.emit("receive_userList", users); 
     return foundUser.credits; 
 }
 
@@ -246,6 +248,36 @@ const getRandomOrder = (array) => {
 };
 
 
+const handleTransferCredits = ({ user, charName, creditsToTransfer }) => {
+  const sender = findUserByCharacterName(user);
+  const receiver = findUserByCharacterName(charName);
+
+  if (!sender || !receiver) {
+    console.error("Transfer failed: invalid sender or receiver", { user, charName });
+    return;
+  }
+
+  if (creditsToTransfer <= 0) {
+    console.error("Transfer failed: must transfer positive credits");
+    return;
+  }
+
+  if (sender.credits < creditsToTransfer) {
+    console.error("Transfer failed: insufficient funds", { sender: sender.characterName, balance: sender.credits });
+    return;
+  }
+
+  setPlayerCredits(sender.characterName, Number(sender.credits) - Number(creditsToTransfer));
+  setPlayerCredits(receiver.characterName, Number(receiver.credits) + Number(creditsToTransfer));
+
+  console.log(
+    `${sender.characterName} transferred ${creditsToTransfer} credits to ${receiver.characterName}`
+  );
+
+  io.emit("receive_userList", users);
+};
+
+
 
 io.on("connection", (socket) => {   
     console.log("user connected: ", socket.id)
@@ -256,9 +288,12 @@ io.on("connection", (socket) => {
     socket.on("client_start_game", handleGameStart)
     socket.on("finish_turn", handleGameState)
     socket.on("set_territory_control", setTerritoryControl)
+    socket.on("transfer_credits", handleTransferCredits)
 }
 )
 
 server.listen(3001, () => {
     console.log("server running")
 })
+
+//
