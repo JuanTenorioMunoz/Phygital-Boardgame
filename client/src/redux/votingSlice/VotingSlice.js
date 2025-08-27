@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    votingStatus: false,
     decreeUnderVote: "",
+    decreeStatus: false,
     decreesListToVote: "",
     votesInFavor: [],
     votesAgainst: [],
@@ -15,16 +17,22 @@ const votingSlice = createSlice({
             state.decreeUnderVote = action.payload
         },
         setDecreesListToVote: (state, action) => {
-            state.decreeUnderVote = action.payload
+            state.decreesListToVote = action.payload
         },
         setVotesInFavor: (state, action) => {
-            state.decreeUnderVote = action.payload
+            state.votesInFavor = action.payload
         },
         setVotesAgainst: (state, action) => {
-            state.decreeUnderVote = action.payload
+            state.votesAgainst = action.payload
         },
+        setVotingStatus: (state, action) => {
+            state.votingStatus= action.payload
+        },
+        setDecreeStatus: (state,action) => {
+            state.decreeStatus = action.payload
+        }
     }
 })
 
-export const {setDecreeUnderVote, setDecreesListToVote, setVotesAgainst, setVotesInFavor} = votingSlice.actions;
+export const {setVotingStatus, setDecreeUnderVote, setDecreesListToVote, setVotesAgainst, setVotesInFavor} = votingSlice.actions;
 export default votingSlice.reducer;

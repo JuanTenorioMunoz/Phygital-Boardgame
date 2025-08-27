@@ -29,9 +29,11 @@ let activeDecrees = [];
 let territories = [];
 
 let decreesToVote = [];
+let decreeUnderVote = {};
 let inFavor = [];
 let against = [];
-const votingTime = [];
+const submissionTime = 30 * 1000;
+const votingTime = 30 * 1000;
 
 const decreesList = decrees;
 const initialDecreesList = initialDecrees;
@@ -55,9 +57,48 @@ const handleGameState = () => {
   } else {
     turnNumber = 1;
     cycleNumber++;
+
+
   }
 
   io.emit("turn_and_cycle", {turnNumber, cycleNumber})
+}
+
+const votingHandling = () => {
+  setVotingStatus();
+
+  setTimeout(() => {
+    io.emit("send_decrees_list_to_vote", decreesToVote)
+    votingPhases()
+  }, submissionTime)
+
+}
+
+const votingPhases = (index) => {
+  if (index >= decreesToVote.length) {
+    console.log("All decrees processed");
+    return;
+  }
+
+  decreeUnderVote = decreesToVote[index];
+  io.emit("start_voting", decreeUnderVote);
+
+  setTimeout(() => {
+    if (inFavor.length > against.length) {
+      io.emit("successful_decree", decreeUnderVote);
+    } else {
+      io.emit("defeated_decree", decreeUnderVote);
+    }
+
+    inFavor = [];
+    against = [];
+
+
+    setTimeout(() => {votingPhases(index + 1)}, 10000);
+  }, votingTime);
+};
+const setVotingStatus = () => {
+  io.emit("handle_voting_status")
 }
 
 const definePlayerOrder = () => {
@@ -276,6 +317,36 @@ const handleTransferCredits = ({ user, charName, creditsToTransfer }) => {
 
   io.emit("receive_userList", users);
 };
+
+const handleTransferCreditsToBank = ({ user, creditsToTransfer }) => {
+  const sender = findUserByCharacterName(user);
+
+  if (!sender) {
+    console.error("Transfer failed: invalid sender", { user });
+    return;
+  }
+
+  if (creditsToTransfer <= 0) {
+    console.error("Transfer failed: must transfer positive credits");
+    return;
+  }
+
+  if (sender.credits < creditsToTransfer) {
+    console.error("Transfer failed: insufficient funds", { 
+      sender: sender.characterName, 
+      balance: sender.credits 
+    });
+    return;
+  }
+
+  setPlayerCredits(
+    sender.characterName,
+    Number(sender.credits) - Number(creditsToTransfer)
+  );
+  
+  io.emit("receive_userList", users);
+};
+
 
 
 
