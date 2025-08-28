@@ -7,7 +7,6 @@ import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
 import socket from "../client/src/socket.js";
 import { error } from "console";
-import { decrees, initialDecrees } from "./db/decrees.js";
 
 
 const app = express();
@@ -25,16 +24,9 @@ const io = new Server(server, {
 let users = characters;
 let turnNumber = 1;
 let cycleNumber = 1;
-let activeDecrees = [];
 let territories = [];
 
-let decreesToVote = [];
-let inFavor = [];
-let against = [];
-const votingTime = [];
 
-const decreesList = decrees;
-const initialDecreesList = initialDecrees;
 
 let workerPrice = 600;
 let registerPrice = 200;
@@ -91,7 +83,6 @@ const handleUpdateCharacterStatus = ({ charName, status }) => {
 
 const handleGameStart = () => {
     definePlayerOrder();
-    setInitialDecrees();
     territories = setTerritoriesValues();
     turnNumber = 1;
     cycleNumber = 1;
@@ -164,12 +155,6 @@ const setPlayerCredits = (username, value) => {
     return foundUser.credits; 
 }
 
-const setInitialDecrees = () => {
-    const shuffle = getRandomOrder(initialDecreesList)
-    activeDecrees = shuffle.slice(0,3)
-
-    io.emit("send_current_decrees", activeDecrees)
-}
 
 const whoseTurnIsIT = () => {
     const userWithTurnIs = users.find(u => u.turnOrder === turnNumber);
@@ -236,11 +221,6 @@ const setTerritoryControl = ({ user, territoryId }) => {
   io.emit("receive_userList", users); 
 };
 
-const decreeHandler = (newDecree) => {
-  activeDecrees.shift();
-  activeDecrees.push(newDecree);
-};
-
 const getRandomOrder = (array) => {
 
   const shuffled = [...array].sort(() => 0.5 - Math.random());
@@ -281,7 +261,6 @@ const handleTransferCredits = ({ user, charName, creditsToTransfer }) => {
 
 io.on("connection", (socket) => {   
     console.log("user connected: ", socket.id)
-    console.log(initialDecrees)
 
     socket.on("request_userList", () => handleRequestUserList(socket));
     socket.on("update_character_status", handleUpdateCharacterStatus);

@@ -13,7 +13,6 @@ const Dashboard = () => {
   const territories = useSelector((state) => state.gameState.territories)
   const users = useSelector((state) => state.users)
   const activeUsers = users.filter(user => user.status === true)
-  const decrees = useSelector((state) => state.gameState.decrees)
 
   const playerCredits = arrayObjectParamValuesFinder(users, "characterName", user, "credits")
 
@@ -30,17 +29,8 @@ const Dashboard = () => {
     console.log("users", users)
   }
 
-
   const handleEndTurn = () => {
     socket.emit("finish_turn")
-  }
-
-  const goToQR = () => {
-    navigate("/QR")
-  }
-
-  const goToTerritory = () => {
-    navigate("/territory")
   }
 
   useEffect(() => {
@@ -59,11 +49,6 @@ const Dashboard = () => {
     <button onClick={() => setTerritoryControl(territoryId)}></button>
     <button onClick={handleEndTurn}>End turn</button>
 
-    <div className="active-decrees">
-      {decrees && decrees.map((decree) => (
-      <DecreeCard decreeName={decree.title} />
-      ))}
-    </div>
 
     <div className='active-users'>
       {activeUsers.map((user) => {

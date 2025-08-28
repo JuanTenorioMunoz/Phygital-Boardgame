@@ -16,7 +16,7 @@ const Territory = () => {
             territory.players.includes(player)
           )
           .map((territory) => (
-            <Card name={territory.name} desc={territory.desc} credits={territory.players.length ? territory.credits / territory.players.length : 0} />
+            <Card name={territory.name} credits={territory.players.length ? territory.credits / territory.players.length : 0} />
           ))}
       </div>
     </div>
