@@ -2,14 +2,14 @@ import { useSelector } from "react-redux";
 import { useSocket } from "../../SocketProvider"
 
 const HorizontalCard = ({ charName, credits, image, turn, currentTurn }) => {
-  const socket = useSocket();
-  const user = useSelector((state) => state.player);
+ 
+
 
   const isActiveTurn = turn === currentTurn;
 
   return (
     <div
-      className={`horizontal-card p-4 rounded-2xl shadow-md flex items-center gap-4 transition-all duration-300 
+      className={`p-4 rounded-2xl shadow-md flex items-center gap-4 transition-all duration-300 
         ${isActiveTurn ? "bg-yellow-200 border-4 border-yellow-500 scale-105" : "bg-white border border-gray-300"}
       `}
     >
