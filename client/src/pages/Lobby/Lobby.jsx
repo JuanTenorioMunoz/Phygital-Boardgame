@@ -46,6 +46,10 @@ const Lobby = () => {
     socket.emit("request_userList");
   };
 
+  if(savedChar){
+    setSelected(true)
+  }
+
   if (socket.connected) {
     handleConnect();
   } else {
