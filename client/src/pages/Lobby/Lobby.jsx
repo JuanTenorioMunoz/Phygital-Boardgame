@@ -64,7 +64,7 @@ const Lobby = () => {
     socket.off("connect", handleConnect);
   };
 
-}, [gameStatus, socket]);
+}, [gameStatus, userList, socket]);
 
   return (
     <>
