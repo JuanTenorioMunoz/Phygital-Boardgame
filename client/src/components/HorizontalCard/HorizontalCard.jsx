@@ -15,9 +15,11 @@ const HorizontalCard = ({ charName, credits, image, turn, currentTurn }) => {
     >
       {image && <img className="character-image w-16 h-16 rounded-full" src={image} alt={charName} />}
       <div>
-        <h1 className="turn text-sm font-semibold">Turn: {turn}</h1>
-        <h1 className="character-name text-lg font-bold">{charName}</h1>
-        <h2 className="character-credits text-sm">Credits: {credits}</h2>
+        <h1 className="flex flex-row items-center gap-x-2">{turn}</h1>
+        <div>
+            <h1 className="character-name text-lg font-bold">{charName}</h1>
+            <h2 className="character-credits text-sm">Credits: {credits}</h2>
+        </div>
       </div>
     </div>
   );
