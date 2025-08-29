@@ -1,24 +1,26 @@
 import { useSelector } from "react-redux";
 import { useSocket } from "../../SocketProvider"
-import { useState } from "react";
 
+const HorizontalCard = ({ charName, credits, image, turn, currentTurn }) => {
+  const socket = useSocket();
+  const user = useSelector((state) => state.player);
 
+  const isActiveTurn = turn === currentTurn;
 
-const HorizontalCard = ({charName,credits, image, turn}) => {
+  return (
+    <div
+      className={`horizontal-card p-4 rounded-2xl shadow-md flex items-center gap-4 transition-all duration-300 
+        ${isActiveTurn ? "bg-yellow-200 border-4 border-yellow-500 scale-105" : "bg-white border border-gray-300"}
+      `}
+    >
+      {image && <img className="character-image w-16 h-16 rounded-full" src={image} alt={charName} />}
+      <div>
+        <h1 className="turn text-sm font-semibold">Turn: {turn}</h1>
+        <h1 className="character-name text-lg font-bold">{charName}</h1>
+        <h2 className="character-credits text-sm">Credits: {credits}</h2>
+      </div>
+    </div>
+  );
+};
 
-    const socket = useSocket();
-    const user = useSelector((state) => state.player)
-
-    return(
-        <>
-            <div className="horizontal-card">
-                <img className="character-image" src={image}></img>
-                <h1 className="turn">{turn}</h1>
-                <h1 className="character-name">{charName}</h1>
-                <h2 className="character-credits">Credits: {credits}</h2>
-            </div>
-        </>
-    )
-}
-
-export default HorizontalCard
+export default HorizontalCard;

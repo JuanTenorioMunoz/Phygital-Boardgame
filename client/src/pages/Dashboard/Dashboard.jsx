@@ -23,46 +23,46 @@ const Dashboard = () => {
   const turnNumber = useSelector((state) => state.gameState.turn)
   const cycleNumber = useSelector((state) => state.gameState.cycle)
 
-  const setTerritoryControl = (territoryId) =>{
-    socket.emit("set_territory_control", {user, territoryId})
-    console.log(territories)
-    console.log("users", users)
-  }
-
   const handleEndTurn = () => {
     socket.emit("finish_turn")
   }
 
-  useEffect(() => {
-  }, [])
+  const playerTurnOrder = users.find(u => u.characterName === user)?.turnOrder;
 
   return (
     <>
-    <div className='options'>
-      <Navbar></Navbar>
-    </div>
-    <h1>Credits: {playerCredits}</h1>
-    <div>You are: {user} </div>
-    <div>Turn: {turnNumber}</div>
-    <div>Cycle: {cycleNumber}</div>
-    <input onChange={(e) => setTerritoryID(e.target.value)}></input>
-    <button onClick={() => setTerritoryControl(territoryId)}></button>
-    <button onClick={handleEndTurn}>End turn</button>
+      <div className='options'>
+        <Navbar />
+      </div>
 
+      <h1>Credits: {playerCredits}</h1>
+      <div>You are: {user} </div>
+      <div>Turn: {turnNumber}</div>
+      <div>Cycle: {cycleNumber}</div>
 
-    <div className='active-users'>
-      {activeUsers
-        .slice() 
-        .sort((a, b) => a.turnOrder - b.turnOrder) 
-        .map((user) => (
-          <HorizontalCard 
-            key={user.characterName}
-            charName={user.characterName} 
-            credits={user.credits}
-            turn={user.turnOrder}
-          />
-        ))}
-    </div>
+      {playerTurnOrder === turnNumber && (
+        <button 
+          onClick={handleEndTurn} 
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg mt-2"
+        >
+          End turn
+        </button>
+      )}
+
+      <div className='active-users'>
+        {activeUsers
+          .slice()
+          .sort((a, b) => a.turnOrder - b.turnOrder) 
+          .map((user) => (
+            <HorizontalCard 
+              key={user.characterName}
+              charName={user.characterName} 
+              credits={user.credits}
+              turn={user.turnOrder}
+              currentTurn={turnNumber}
+            />
+          ))}
+      </div>
     </>
   )
 }
