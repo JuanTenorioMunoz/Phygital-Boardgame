@@ -30,6 +30,11 @@ const Lobby = () => {
     console.log(gameStatus)
   }
 
+  const resetChars = () => {
+    socket.emit("reset_chars")
+    dispatch(updatePlayer(""))
+  } 
+
   const gameStatus = useSelector((state) => state.gameState.status)
 
   useEffect(() => {
@@ -46,7 +51,6 @@ const Lobby = () => {
   return (
     <>
         <button onClick={startGame}>Start Game</button>
-        
         <div>You are: {user}</div>
 
     {hasSelected && (
@@ -73,6 +77,8 @@ const Lobby = () => {
             return(<CharCard charName={user.characterName} image={user.portrait}></CharCard>)
           })}
       </div>
+
+      <button onClick={resetChars}>Reset Characters</button>
     </>
   )
 }
