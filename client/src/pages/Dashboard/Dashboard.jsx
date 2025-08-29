@@ -59,7 +59,7 @@ const Dashboard = () => {
             key={user.characterName}
             charName={user.characterName} 
             credits={user.credits}
-            turn={turn.turnOrder}
+            turn={user.turnOrder}
           />
         ))}
     </div>
