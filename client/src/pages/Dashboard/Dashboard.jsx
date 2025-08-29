@@ -51,9 +51,16 @@ const Dashboard = () => {
 
 
     <div className='active-users'>
-      {activeUsers.map((user) => {
-        return(<HorizontalCard charName={user.characterName} credits={user.credits}></HorizontalCard>)
-      })}
+      {activeUsers
+        .slice() 
+        .sort((a, b) => a.turnOrder - b.turnOrder) 
+        .map((user) => (
+          <HorizontalCard 
+            key={user.characterName}
+            charName={user.characterName} 
+            credits={user.credits} 
+          />
+        ))}
     </div>
     </>
   )
