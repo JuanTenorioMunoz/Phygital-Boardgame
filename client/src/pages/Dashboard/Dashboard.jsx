@@ -60,6 +60,7 @@ const Dashboard = () => {
               credits={user.credits}
               turn={user.turnOrder}
               currentTurn={turnNumber}
+              image={user.portrait}
             />
           ))}
       </div>

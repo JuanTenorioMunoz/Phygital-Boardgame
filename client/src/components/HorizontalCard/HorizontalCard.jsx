@@ -12,14 +12,16 @@ const HorizontalCard = ({charName,credits, image, turn, currentTurn}) => {
 
     return(
         <>
-            <div className="horizontal-card">
-                <img className="character-image" src={image}></img>
-                <div className="turn-container">
-                <h1 className="turn">{turn}</h1>
-                <h1 className="character-name">{charName}</h1>
-                <h2 className="character-credits">Credits: {credits}</h2>
-                </div>
-            </div>
+        <div className={`horizontal-card ${turn === currentTurn ? "active" : ""}`}>
+  <img className="character-image" src={image} alt={charName} />
+  <div className="turn-container">
+    <div className="details">
+      <h1 className="character-name">{charName}</h1>
+      <h2 className="character-credits">Credits: {credits}</h2>
+    </div>
+  </div>
+  <h1 className="turn">{turn}</h1>
+</div>
         </>
     )
 }

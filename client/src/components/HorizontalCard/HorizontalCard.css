@@ -1,4 +1,76 @@
+/* HorizontalCard.css */
+
+/* Main card container */
+.horizontal-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  background: #000;       /* black card */
+  width: 100%;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+/* Character image */
+.character-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Container: turn + details side by side */
 .turn-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Turn */
+.turn {
+  margin: 0;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Details: name above credits */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.character-name,
+.character-credits {
+  margin: 2px 0;
+  font-weight: normal;
+}
+
+/* Hover */
+.horizontal-card:hover {
+  background: #111;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .horizontal-card {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .character-image {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.horizontal-card.active {
+  box-shadow: 0 0 10px 2px #fff;
 }
