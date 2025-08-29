@@ -33,6 +33,7 @@ const Lobby = () => {
   const resetChars = () => {
     socket.emit("reset_chars")
     dispatch(updatePlayer(""))
+    setSelected(false)
   } 
 
   const gameStatus = useSelector((state) => state.gameState.status)
