@@ -13,26 +13,25 @@ const Navbar = () => {
 
   return (
     <nav className="fixed bottom-0 w-full bg-gray-900 text-white shadow-lg">
-  <div className="flex justify-around items-center py-2">
-    {navItems.map(({ path, label, icon }) => {
-      const isActive = location.pathname === path;
+      <div className="flex justify-around items-center py-2">
+        {navItems.map(({ path, label, icon }) => {
+          const isActive = location.pathname === path;
 
-      return (
-        <button
-          key={path}
-          onClick={() => navigate(path)}
-          className={`flex flex-col items-center px-5 py-3 text-sm font-medium transition-colors 
-            ${isActive ? "text-blue-400" : "text-gray-400"} 
-            active:scale-95`}
-        >
-          <div className="w-6 h-6">{icon}</div>
-          <span className="mt-1">{label}</span>
-        </button>
-      );
-    })}
-  </div>
-</nav>
-
+          return (
+            <button
+              key={path}
+              onClick={() => navigate(path)}
+              className={`flex flex-col items-center px-4 py-2 text-xs transition-colors 
+                ${isActive ? "text-blue-400" : "text-gray-400"} 
+                active:scale-95`}
+            >
+              {icon}
+              <span className="mt-1">{label}</span>
+            </button>
+          );
+        })}
+      </div>
+    </nav>
   );
 };
 
