@@ -21,7 +21,8 @@ const io = new Server(server, {
     }
 })
 
-let users = characters;
+const initialCharacters = structuredClone(characters);
+let users = structuredClone(initialCharacters);
 let turnNumber = 1;
 let cycleNumber = 1;
 let territories = [];
@@ -263,6 +264,11 @@ const handleTransferCredits = ({ user, charName, creditsToTransfer }) => {
   io.emit("receive_userList", users);
 };
 
+const handleResetChars = () => {
+  users = structuredClone(initialCharacters); 
+  io.emit("receive_user_list", users)
+  console.log("reset", characters)
+}
 
 
 io.on("connection", (socket) => {   
@@ -274,6 +280,7 @@ io.on("connection", (socket) => {
     socket.on("finish_turn", handleGameState)
     socket.on("set_territory_control", setTerritoryControl)
     socket.on("transfer_credits", handleTransferCredits)
+    socket.on("reset_chars", handleResetChars)
 }
 )
 
