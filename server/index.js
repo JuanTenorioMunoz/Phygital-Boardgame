@@ -33,7 +33,7 @@ let registerPrice = 200;
 
 const handleRequestUserList = (socket) => {
     socket.emit("receive_userList", users)
-    console.log(users)
+    console.log("users", users)
     console.log("REGISTER")
 }
 
