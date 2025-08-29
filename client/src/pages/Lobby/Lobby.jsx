@@ -31,10 +31,11 @@ const Lobby = () => {
   }
 
   const resetChars = () => {
+    setSelected(false)
     localStorage.removeItem("playerChar")
     socket.emit("reset_chars")
     dispatch(updatePlayer(""))
-    setSelected(false)
+    console.log("userlist when reset", userList)
   } 
 
   const gameStatus = useSelector((state) => state.gameState.status)
