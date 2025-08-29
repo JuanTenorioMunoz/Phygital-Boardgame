@@ -13,6 +13,7 @@ const Lobby = () => {
   const dispatch = useDispatch();
   const socket = useSocket();
   
+  const [hasSelected, setSelected] = useState(false);
   const userList = useSelector((state) => state.users)
   const user = useSelector((state) => state.player)
   const savedChar = localStorage.getItem("playerChar");
@@ -20,8 +21,9 @@ const Lobby = () => {
   const selectCharacter = (charName) => {
     socket.emit("update_character_status", { charName, status: true });
     localStorage.setItem("playerChar", charName);
+    setSelected(true)
     dispatch(updatePlayer(charName));
-};
+  };
 
   const startGame = () =>{
     socket.emit("client_start_game")
@@ -44,18 +46,24 @@ const Lobby = () => {
   return (
     <>
         <button onClick={startGame}>Start Game</button>
-        <div>LOBBYY</div>
         
         <div>You are: {user}</div>
 
-      <div className='available-characters'>
-        <h1>Available Characters:</h1>
-        {userList
-          .filter(user => user.status === false) 
-          .map((user)=>{
-            return(<CharCard charName={user.characterName} image={user.portrait} onClick={() => selectCharacter(user.characterName)}></CharCard>)
-          })}
-      </div>
+    {hasSelected && (
+    <div className='available-characters'>
+     <h1>Available Characters:</h1>
+      {userList
+        .filter(user => user.status === false) 
+        .map((user) => (
+          <CharCard 
+            key={user.characterName} 
+            charName={user.characterName} 
+            image={user.portrait} 
+            onClick={() => selectCharacter(user.characterName)} 
+        />
+      ))}
+    </div>
+)}
 
       <div className='selected-characters'>
         <h1>Current players:</h1>
