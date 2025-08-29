@@ -1,0 +1,6 @@
+.active-users{
+    margin-top: 20px;
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+}

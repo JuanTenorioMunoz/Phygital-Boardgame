@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import DecreeCard from '../../components/DecreeCard/DecreeCard';
 import { arrayObjectParamValuesFinder } from '../../utils/utils';
 import Navbar from '../../components/Navbar/Navbar';
+import './Dashboard.css'
 
 const Dashboard = () => {
   const socket = useSocket();
