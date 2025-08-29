@@ -270,6 +270,10 @@ const handleResetChars = () => {
   console.log("reset", characters)
 }
 
+const handleReconnect = () => {
+  io.emit("receive_territories_data", territories)
+  io.emit("turn_and_cycle", {turnNumber, cycleNumber})
+}
 
 io.on("connection", (socket) => {   
     console.log("user connected: ", socket.id)
@@ -281,6 +285,7 @@ io.on("connection", (socket) => {
     socket.on("set_territory_control", setTerritoryControl)
     socket.on("transfer_credits", handleTransferCredits)
     socket.on("reset_chars", handleResetChars)
+    socket.on("reconnect", handleReconnect)
 }
 )
 
@@ -288,4 +293,4 @@ server.listen(3001, () => {
     console.log("server running")
 })
 
-//ser3
+//ser3/
