@@ -1,4 +1,4 @@
-const startingCredits = 800
+const startingCredits = 0
 const initialWorkers = 0
 
 const characters = [

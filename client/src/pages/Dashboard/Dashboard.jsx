@@ -58,7 +58,8 @@ const Dashboard = () => {
           <HorizontalCard 
             key={user.characterName}
             charName={user.characterName} 
-            credits={user.credits} 
+            credits={user.credits}
+            turn={turn.turnOrder}
           />
         ))}
     </div>
