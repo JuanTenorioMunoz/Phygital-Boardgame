@@ -31,6 +31,7 @@ const Lobby = () => {
   }
 
   const resetChars = () => {
+    localStorage.removeItem("playerChar")
     socket.emit("reset_chars")
     dispatch(updatePlayer(""))
     setSelected(false)
