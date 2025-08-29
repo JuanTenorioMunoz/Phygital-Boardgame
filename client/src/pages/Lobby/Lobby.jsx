@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import CharCard from '../../components/CharCard/CharCard';
 import { updatePlayer } from '../../redux/playerSlice/playerSlice';
 import { useNavigate } from 'react-router-dom';
-import { setUsers } from '../../redux/usersSlice/UsersSlice';
 
 
 const Lobby = () => {
@@ -34,7 +33,6 @@ const Lobby = () => {
   const resetChars = () => {
     socket.emit("reset_chars")
     dispatch(updatePlayer(""))
-    dispatch(setUsers(""))
     setSelected(false)
   } 
 
