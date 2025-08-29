@@ -61,7 +61,7 @@ const Lobby = () => {
         <button onClick={startGame}>Start Game</button>
         <div>You are: {user}</div>
 
-    {hasSelected && (
+    {!hasSelected && (
     <div className='available-characters'>
      <h1>Available Characters:</h1>
       {userList
