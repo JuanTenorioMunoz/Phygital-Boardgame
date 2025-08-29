@@ -38,15 +38,23 @@ const Lobby = () => {
   const gameStatus = useSelector((state) => state.gameState.status)
 
   useEffect(() => {
+  if (!socket) return;
+
+  const handleConnect = () => {
+    console.log("Socket connected, requesting user list...");
     socket.emit("request_userList");
+  };
 
-    console.log(gameStatus)
+  if (socket.connected) {
+    handleConnect();
+  } else {
+    socket.on("connect", handleConnect);
+  }
 
-    if (gameStatus) {
-      navigate("/dashboard");
-    }
-
-  }, [gameStatus, socket])
+  return () => {
+    socket.off("connect", handleConnect);
+  };
+}, [socket]);
 
   return (
     <>
