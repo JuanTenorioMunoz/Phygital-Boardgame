@@ -19,16 +19,13 @@ const Lobby = () => {
 
   const selectCharacter = (charName) => {
     socket.emit("update_character_status", { charName, status: true });
+    localStorage.setItem("playerChar", charName);
     dispatch(updatePlayer(charName));
 };
 
   const startGame = () =>{
     socket.emit("client_start_game")
     console.log(gameStatus)
-  }
-
-  const setTerritoryControl = (user, territoryId) =>{
-    socket.emit("set_territory_control")
   }
 
   const gameStatus = useSelector((state) => state.gameState.status)
