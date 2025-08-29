@@ -47,6 +47,8 @@ const handleGameState = () => {
   } else {
     turnNumber = 1;
     cycleNumber++;
+
+    onCycleStart();
   }
 
   io.emit("turn_and_cycle", {turnNumber, cycleNumber})
@@ -170,20 +172,22 @@ const getPlayerCredits = (username) => {
 }
 
 const onTurnStart = () => {
-    if(cycleNumber === 1){
-
-    } else{
-        const currentPlayer = whoseTurnIsIT()
-        const currentCredits = getPlayerCredits(currentPlayer);
-        const territoriesIncome = getTerritoriesIncome(currentPlayer);
-        const newCredits = setPlayerCredits(currentPlayer, currentCredits + territoriesIncome)
-        console.log("NEW CREDTIS", currentPlayer, newCredits)
-    }
+  
 }
 
 const onCycleStart = () => {
+  const activeUsers = users.filter(user => user.status === true);
 
-}
+  activeUsers.forEach(currentPlayer => {
+    const currentCredits = getPlayerCredits(currentPlayer.characterName); 
+    const territoriesIncome = getTerritoriesIncome(currentPlayer.characterName);
+    const newCredits = setPlayerCredits(
+      currentPlayer.characterName, 
+      currentCredits + territoriesIncome
+    );
+    console.log("Cycle income:", currentPlayer.characterName, newCredits);
+  });
+};
 
 const findUserTerritories = (userName) => {
   const foundUser = findUserByCharacterName(userName);
@@ -274,5 +278,3 @@ io.on("connection", (socket) => {
 server.listen(3001, () => {
     console.log("server running")
 })
-
-//////
