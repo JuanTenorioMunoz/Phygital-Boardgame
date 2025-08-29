@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-const socket = io("https://d66219ac6ef4.ngrok-free.app", {
+const socket = io("https://c38e2c7f9705.ngrok-free.app", {
   transports: ['websocket']
 });
 export default socket;

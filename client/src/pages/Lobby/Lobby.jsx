@@ -51,11 +51,16 @@ const Lobby = () => {
   } else {
     socket.on("connect", handleConnect);
   }
+  
+  if (gameStatus) {
+      navigate("/dashboard");
+    }
 
   return () => {
     socket.off("connect", handleConnect);
   };
-}, [socket]);
+
+}, [gameStatus, socket]);
 
   return (
     <>
