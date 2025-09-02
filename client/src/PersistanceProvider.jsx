@@ -11,7 +11,7 @@ const PersistenceProvider = ({ children }) => {
   useEffect(() => {
     if (savedChar) {
       socket.emit("update_character_status", { charName: savedChar, status: true });
-      socket.emit("reconnect")
+      socket.emit("reconnect");
       dispatch(updatePlayer(savedChar));
     }
   }, [savedChar, socket, dispatch]);
