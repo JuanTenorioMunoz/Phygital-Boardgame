@@ -7,6 +7,9 @@ import {shuffleArray} from "./utils.js";
 import {territoriesBenefits, territoriesName} from "./db/territories.js";
 import socket from "../client/src/socket.js";
 import { error } from "console";
+import fs from "fs";
+import path from "path";
+import os from "os";
 
 
 const app = express();
@@ -27,10 +30,25 @@ let turnNumber = 1;
 let cycleNumber = 1;
 let territories = [];
 
+const exportCycleData = (cycleNumber, users, territories) => {
+  const data = {
+    cycle: cycleNumber,
+    users,
+    territories,
+    timestamp: new Date().toISOString(),
+  };
 
+  const desktopPath = path.join(os.homedir(), "Desktop", "cycles");
 
-let workerPrice = 600;
-let registerPrice = 200;
+  if (!fs.existsSync(desktopPath)) {
+    fs.mkdirSync(desktopPath, { recursive: true });
+  }
+
+  const fileName = path.join(desktopPath, `cycle_${cycleNumber}.json`);
+  fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
+
+  console.log(`Cycle data exported: ${fileName}`);
+};
 
 const handleRequestUserList = (socket) => {
     socket.emit("receive_userList", users)
@@ -189,6 +207,8 @@ const onCycleStart = () => {
       currentCredits + territoriesIncome
     );
     console.log("Cycle income:", currentPlayer.characterName, newCredits);
+
+    exportCycleData(cycleNumber, users, territories);
   });
 };
 
@@ -293,4 +313,4 @@ server.listen(3001, () => {
     console.log("server running")
 })
 
-//ser3/
+//ser3////////////
