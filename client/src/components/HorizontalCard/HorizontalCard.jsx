@@ -13,7 +13,7 @@ const HorizontalCard = ({charName,credits, image, turn, currentTurn}) => {
     return(
         <>
         <div className={`horizontal-card ${turn === currentTurn ? "active" : ""}`}>
-          <img className="character-image" src={image} alt={charName} />
+          <img className="character-imagee" src={image} alt={charName} />
           <div className="turn-container">
         <div className="details">
           <h1 className="character-name">{charName}</h1>

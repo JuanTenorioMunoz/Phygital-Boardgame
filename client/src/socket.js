@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-const socket = io("https://773ae1f408f6.ngrok-free.app", {
+const socket = io("http://localhost:3001", {
   transports: ['websocket']
 });
 export default socket;
