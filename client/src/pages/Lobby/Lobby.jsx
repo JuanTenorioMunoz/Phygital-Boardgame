@@ -71,9 +71,7 @@ const Lobby = () => {
   return (
     <>
     <div className='lobby-container'>
-        <button onClick={startGame}>Start Game</button>
-        <div>You are: {user}</div>
-
+        <button className='start-game-button' onClick={startGame}>Start Game</button>
         {!hasSelected && (
         <div className='available-characters'>
         <h1>Available Characters:</h1>
@@ -99,7 +97,7 @@ const Lobby = () => {
           })}
       </div>
 
-      <button onClick={resetChars}>Reset Characters</button>
+      <button className="reset-button" onClick={resetChars}>Reset Characters</button>
       </div>
     </>
   )
