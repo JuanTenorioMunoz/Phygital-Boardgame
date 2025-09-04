@@ -47,8 +47,6 @@ const Dashboard = () => {
         <div className='turn-number'>Turn: {turnNumber}</div>
         <div className='cycle-number'>Cycle: {cycleNumber}</div>
       </div>
-      <input onChange={(e) => setTerritoryID(e.target.value)}></input>
-    <button onClick={() => setTerritoryControl(territoryId)}></button>
       {playerTurnOrder === turnNumber && (
         <button 
           onClick={handleEndTurn} 
