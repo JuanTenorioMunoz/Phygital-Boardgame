@@ -1,6 +1,17 @@
-.active-users{
-    margin-top: 20px;
-    row-gap: 10px;
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  justify-content: flex-start;
+  padding: 16px;             
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;          
+  margin: 0 auto;            
+}
+
+.turnUndCycle {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
 }

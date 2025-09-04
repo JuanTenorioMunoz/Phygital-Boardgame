@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, QrCode, Map } from "lucide-react"; 
+import { Home, QrCode, Map } from "lucide-react";
+import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full bg-gray-900 text-white shadow-lg">
-      <div className="flex justify-around items-center py-2">
+    <nav className="navbar">
+      <div className="navbar-inner">
         {navItems.map(({ path, label, icon }) => {
           const isActive = location.pathname === path;
 
@@ -21,12 +22,10 @@ const Navbar = () => {
             <button
               key={path}
               onClick={() => navigate(path)}
-              className={`flex flex-col items-center px-4 py-2 text-xs transition-colors 
-                ${isActive ? "text-blue-400" : "text-gray-400"} 
-                active:scale-95`}
+              className={`navbar-button ${isActive ? "active" : ""}`}
             >
               {icon}
-              <span className="mt-1">{label}</span>
+              <span>{label}</span>
             </button>
           );
         })}

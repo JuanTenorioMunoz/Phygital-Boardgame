@@ -73,20 +73,20 @@ const Lobby = () => {
         <button onClick={startGame}>Start Game</button>
         <div>You are: {user}</div>
 
-    {!hasSelected && (
-    <div className='available-characters'>
-     <h1>Available Characters:</h1>
-      {userList
-        .filter(user => user.status === false) 
-        .map((user) => (
-          <CharCard 
-            key={user.characterName} 
-            charName={user.characterName} 
-            image={user.portrait} 
-            onClick={() => selectCharacter(user.characterName)} 
-        />
-      ))}
-    </div>
+        {!hasSelected && (
+        <div className='available-characters'>
+        <h1>Available Characters:</h1>
+        {userList
+            .filter(user => user.status === false) 
+            .map((user) => (
+            <CharCard 
+              key={user.characterName} 
+              charName={user.characterName} 
+              image={user.portrait} 
+              onClick={() => selectCharacter(user.characterName)} 
+            />
+          ))}
+        </div>
 )}
 
       <div className='selected-characters'>

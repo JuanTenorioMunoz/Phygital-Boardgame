@@ -22,16 +22,12 @@ body {
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
 
   min-height: 100vh;
-  padding: 1rem;
 }
 
 
-
-/* Headings */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.25;
@@ -61,14 +57,13 @@ button {
 }
 
 button:hover {
-  background: #374151; /* gray-700 */
+  background: #374151;
 }
 
 button:active {
-  background: #4b5563; /* gray-600 */
+  background: #4b5563; 
 }
 
-/* Scrollbar (for webkit browsers) */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -83,13 +78,12 @@ button:active {
   background: #111827;
 }
 
-/* Responsive tweaks */
 @media (min-width: 640px) {
   html {
-    font-size: 18px; /* scale text a bit on larger screens */
+    font-size: 18px;
   }
   button {
-    width: auto; /* no need for full width on desktop */
+    width: auto; 
     min-width: 120px;
   }
 }

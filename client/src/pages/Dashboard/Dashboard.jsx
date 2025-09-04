@@ -35,11 +35,13 @@ const Dashboard = () => {
       <div className='options'>
         <Navbar />
       </div>
-
+    <div className='dashboard-container'>
       <h1>Credits: {playerCredits}</h1>
       <div>You are: {user} </div>
-      <div>Turn: {turnNumber}</div>
-      <div>Cycle: {cycleNumber}</div>
+      <div className='turnUndCycle'>
+        <div>Turn: {turnNumber}</div>
+        <div>Cycle: {cycleNumber}</div>
+      </div>
 
       {playerTurnOrder === turnNumber && (
         <button 
@@ -64,6 +66,7 @@ const Dashboard = () => {
               image={user.portrait}
             />
           ))}
+      </div>
       </div>
     </>
   )
