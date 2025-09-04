@@ -1,6 +1,4 @@
-/* HorizontalCard.css */
 
-/* Main card container */
 .horizontal-card {
   display: flex;
   align-items: center;
@@ -9,13 +7,12 @@
   padding: 12px;
   border: 1px solid #333;
   border-radius: 12px;
-  background: #000;       /* black card */
+  background: #000;       
   width: 100%;
   box-sizing: border-box;
   color: #fff;
 }
 
-/* Character image */
 .character-image {
   width: 64px;
   height: 64px;
@@ -24,7 +21,6 @@
   flex-shrink: 0;
 }
 
-/* Container: turn + details side by side */
 .turn-container {
   display: flex;
   flex-direction: row;
@@ -33,14 +29,12 @@
   flex: 1;
 }
 
-/* Turn */
 .turn {
   margin: 0;
   font-weight: bold;
   flex-shrink: 0;
 }
 
-/* Details: name above credits */
 .details {
   display: flex;
   flex-direction: column;
@@ -53,12 +47,12 @@
   font-weight: normal;
 }
 
-/* Hover */
+
 .horizontal-card:hover {
   background: #111;
 }
 
-/* Responsive */
+
 @media (max-width: 400px) {
   .horizontal-card {
     gap: 8px;
