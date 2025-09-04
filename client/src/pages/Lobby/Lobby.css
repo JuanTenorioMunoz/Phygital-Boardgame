@@ -3,12 +3,21 @@
   flex-wrap: wrap;
   align-items: center;
   row-gap: 2rem; 
+  justify-content: center;
 }
 
 .selected-characters {
   display: flex;
   flex-wrap: wrap;
   column-gap: 2rem; 
-  row-gap: 2rem;  
+  row-gap: 3rem;  
+  justify-content: center;
+}
+
+.lobby-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }

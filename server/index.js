@@ -286,7 +286,7 @@ const handleTransferCredits = ({ user, charName, creditsToTransfer }) => {
 
 const handleResetChars = () => {
   users = structuredClone(initialCharacters); 
-  io.emit("receive_user_list", users)
+  io.emit("receive_userList", users)
   console.log("reset", characters)
 }
 

@@ -70,6 +70,7 @@ const Lobby = () => {
 
   return (
     <>
+    <div className='lobby-container'>
         <button onClick={startGame}>Start Game</button>
         <div>You are: {user}</div>
 
@@ -99,6 +100,7 @@ const Lobby = () => {
       </div>
 
       <button onClick={resetChars}>Reset Characters</button>
+      </div>
     </>
   )
 }
