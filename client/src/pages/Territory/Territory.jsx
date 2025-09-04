@@ -21,16 +21,21 @@ const Territory = () => {
           ))}
       </div>
 
-      <div className="board-territories">
+          <div className="board-territories">
   <h1>Board territories:</h1>
   {territories.map((territory) => (
     <Card 
       key={territory.id} 
       name={territory.name} 
-      credits={territory.credits} 
+      credits={
+        territory.players.length > 0 
+          ? territory.credits / territory.players.length 
+          : territory.credits
+      } 
     />
   ))}
 </div>
+
     </div>
   );
 };
