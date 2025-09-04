@@ -41,7 +41,7 @@ const Dashboard = () => {
         <Navbar />
       </div>
     <div className='dashboard-container'>
-      <h1>Credits: {playerCredits}</h1>
+      <h1 className='credits-big'>Credits: {playerCredits}</h1>
       <div>You are: {user} </div>
       <div className='turnUndCycle'>
         <div>Turn: {turnNumber}</div>
@@ -52,7 +52,7 @@ const Dashboard = () => {
       {playerTurnOrder === turnNumber && (
         <button 
           onClick={handleEndTurn} 
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg mt-2"
+          className="end-turn-button"
         >
           End turn
         </button>
