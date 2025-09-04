@@ -27,10 +27,11 @@
 
 .end-turn-button {
   max-width: 80%;
-  margin-bottom: 10%;
+  margin-top: 10%;
 }
 
 .active-users{
+  margin-top: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;

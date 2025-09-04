@@ -55,7 +55,7 @@ const Dashboard = () => {
           End turn
         </button>
       )}
-
+      <div></div>
       <div className='active-users'>
         {activeUsers
           .slice()
