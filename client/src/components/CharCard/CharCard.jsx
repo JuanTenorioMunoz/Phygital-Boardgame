@@ -1,16 +1,17 @@
 const CharCard = ({ charName, onClick, image }) => {
   return (
-    <div 
-      className="character-container flex flex-col items-center cursor-pointer p-2" 
+    <div
+      className="character-container relative flex flex-col items-center cursor-pointer p-2"
       onClick={onClick}
     >
-      <h1 className="text-lg font-bold">{charName}</h1>
-      <img 
-        src={image} 
-        alt={charName} 
-        style={{ width: "100px", height: "140px" }}
-        className="max-w-1 max-h-1 object-contain rounded-3xl"
+      <img
+        src={image}
+        alt={charName}
+        className="w-[100px] h-[140px] object-cover rounded-3xl"
       />
+      <h1 className="absolute inset-0 flex items-center justify-center text-lg font-bold text-white drop-shadow-md">
+        {charName}
+      </h1>
     </div>
   )
 }
