@@ -16,12 +16,27 @@
     gap: 10px;
 }
 
-.credits-big{
+.dash-user-name {
   margin-top: 60px;
+  font-size: 50px;
+}
+
+.credits-big{
   font-size: 40px;
 }
 
 .end-turn-button {
   max-width: 80%;
   margin-bottom: 10%;
+}
+
+.active-users {
+  margin-top: 20px;
+  width: 100%;
+  max-height: 300px; 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  padding-right: 10px; 
 }

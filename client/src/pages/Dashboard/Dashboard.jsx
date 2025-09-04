@@ -41,11 +41,11 @@ const Dashboard = () => {
         <Navbar />
       </div>
     <div className='dashboard-container'>
-      <h1 className='credits-big'>Credits: {playerCredits}</h1>
-      <div>You are: {user} </div>
+      <h1 className='dash-user-name'>{user} </h1>
+      <div className='credits-big'>Credits: {playerCredits}</div>
       <div className='turnUndCycle'>
-        <div>Turn: {turnNumber}</div>
-        <div>Cycle: {cycleNumber}</div>
+        <div className='turn-number'>Turn: {turnNumber}</div>
+        <div className='cycle-number'>Cycle: {cycleNumber}</div>
       </div>
       <input onChange={(e) => setTerritoryID(e.target.value)}></input>
     <button onClick={() => setTerritoryControl(territoryId)}></button>
