@@ -23,13 +23,18 @@ const Dashboard = () => {
 
   const turnNumber = useSelector((state) => state.gameState.turn)
   const cycleNumber = useSelector((state) => state.gameState.cycle)
+  
 
   const handleEndTurn = () => {
     socket.emit("finish_turn")
   }
 
   const playerTurnOrder = users.find(u => u.characterName === user)?.turnOrder;
-
+  const setTerritoryControl = (territoryId) =>{
+    socket.emit("set_territory_control", {user, territoryId})
+    console.log(territories)
+    console.log("users", users)
+  }
   return (
     <>
       <div className='options'>
@@ -42,7 +47,8 @@ const Dashboard = () => {
         <div>Turn: {turnNumber}</div>
         <div>Cycle: {cycleNumber}</div>
       </div>
-
+      <input onChange={(e) => setTerritoryID(e.target.value)}></input>
+    <button onClick={() => setTerritoryControl(territoryId)}></button>
       {playerTurnOrder === turnNumber && (
         <button 
           onClick={handleEndTurn} 
