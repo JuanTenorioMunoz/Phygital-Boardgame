@@ -9,10 +9,9 @@
   background: #000;
   color: #fff;
 
-  width: 100%;
+  width: 110%;
   box-sizing: border-box;
 
-  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .territory-card:hover {
@@ -20,14 +19,12 @@
 }
 
 .territory-name {
-  margin: 0 0 6px 0;
   font-size: 20px;
-  font-weight: bold;
 }
 
 .territory-credits {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   color: #ccc;
 }

@@ -1,6 +1,6 @@
 .available-characters {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   row-gap: 2rem; 
 }
